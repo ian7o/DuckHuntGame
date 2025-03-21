@@ -1,0 +1,28 @@
+.sprite-duck {
+	background: url('assets/DuckHuntSprites.png') no-repeat --var(positionX) --var(positionY);
+	width: 34px;
+	height: 24px;
+}
+.secondDuckPosition {
+	background: url('assets/DuckHuntSprites.png') no-repeat -170px -123px;
+	width: 34px;
+	height: 20px;
+}
+.thirdDuckPosition {
+	background: url('assets/DuckHuntSprites.png') no-repeat -211px -119px;
+	width: 32px;
+	height: 28px;
+}
+.duckGetShot {
+	background: url('assets/DuckHuntSprites.png') no-repeat -131px -238px;
+	width: 31px;
+	height: 29px;
+}
+.duckFalling {
+	background: url('assets/DuckHuntSprites.png') no-repeat -178px -237px;
+	width: 18px;
+	height: 30px;
+}
+.duck{
+    position: absolute;
+}
