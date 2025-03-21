@@ -1,0 +1,30 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# VSCode specific files
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Editor backup files
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# If you have any local configuration you don't want to commit
+config.local.js
+
+# If you end up using any package management
+/node_modules
