@@ -1,25 +1,26 @@
 export const Positions = () => {
-  let mouseX;
-  let mouseY;
+	let mouseX;
+	let mouseY;
 
-  document.addEventListener("mousemove", function (mousePosition) {
-    mouseX = mousePosition.clientX;
-    mouseY = mousePosition.clientY;
+	function trackMouse() {
+		document.addEventListener("mousemove", function (mousePosition) {
+			mouseX = mousePosition.clientX;
+			mouseY = mousePosition.clientY;
+			console.log(`Mouse X: ${mouseX}, Mouse Y: ${mouseY}`);
+		});
+	}
 
-    function getMouseXPosition() {
-      return mouseX;
-    }
+	function getMouseXPosition() {
+		return mouseX;
+	}
 
-    function getMouseYPosition() {
-      return mouseY;
-    }
+	function getMouseYPosition() {
+		return mouseY;
+	}
 
-    console.log(`Mouse X: ${getMouseXPosition()}, Mouse Y: ${getMouseYPosition()}`);
-  });
-
-
-  return {
-    getMouseXPosition,
-    getMouseYPosition
-  };
-}
+	return {
+		getMouseXPosition,
+		getMouseYPosition,
+		trackMouse,
+	};
+};
