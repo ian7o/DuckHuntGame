@@ -1,10 +1,12 @@
 :root {
   --duckHitOrMissIconsWidth: 25vw;
+  --scoreContainerWidth: 15vw;
+  --RoundsContainerWidth: 10vw;
 }
 
 .allShotInOneImage {
   position: relative;
-  width: 20vw;
+  width: 15vw;
 }
 
 .allShotInOneImage > img {
@@ -36,6 +38,7 @@
 }
 
 .ducksHitsOrMissCounterContainer {
+  margin-top: 2vw;
   display: flex;
   align-items: center;
   background-color: black;
@@ -71,4 +74,46 @@
   color: white;
   font-size: calc(var(--duckHitOrMissIconsWidth) / 6);
   white-space: nowrap;
+}
+
+.scoreContainer {
+  margin-top: 2vw;
+  display: flex;
+  position: relative;
+  background-color: black;
+  justify-content: center;
+  align-items: center;
+  width: var(--scoreContainerWidth);
+  height: 8vw;
+  border-radius: 2vw;
+  border: 0.5vw solid yellow;
+}
+
+.scoreContainer > p {
+  color: white;
+  margin-right: 5px;
+  font-size: calc(var(--scoreContainerWidth) / 4);
+}
+
+.scoreCounter {
+  align-items: center;
+  color: white;
+  font-size: calc(var(--scoreContainerWidth) / 4);
+}
+
+.RoundsContainer {
+  margin-top: 2vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  width: var(--RoundsContainerWidth);
+  height: 8vw;
+  border-radius: 2vw;
+  border: 0.5vw solid yellow;
+}
+
+.RoundsContainer > span {
+  color: white;
+  font-size: calc(var(--RoundsContainerWidth) / 5);
 }
