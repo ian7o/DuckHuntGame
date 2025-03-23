@@ -2,13 +2,12 @@
   --duckHitOrMissIconsWidth: 25vw;
 }
 
-.allShotInOneImmage {
-  display: flex;
+.allShotInOneImage {
   position: relative;
   width: 20vw;
 }
 
-.allShotInOneImmage > img {
+.allShotInOneImage > img {
   width: 100%;
 }
 
@@ -23,17 +22,17 @@
 
 .firstShootHide {
   left: 0;
-  top: 2%;
+  top: 0;
 }
 
 .secondShootHide {
   left: 33.33%;
-  top: 2;
+  top: 0;
 }
 
 .thirdShootHide {
   left: 66.66%;
-  top: 2;
+  top: 0;
 }
 
 .ducksHitsOrMissCounterContainer {
