@@ -1,41 +1,75 @@
-:root{
-    --duckHitOrMissIconsWidth:50vw
+:root {
+  --duckHitOrMissIconsWidth: 25vw;
+}
+
+.allShotInOneImmage {
+  display: flex;
+  position: relative;
+  width: 20vw;
+}
+
+.allShotInOneImmage > img {
+  width: 100%;
+}
+
+.firstShootHide,
+.secondShootHide,
+.thirdShootHide {
+  position: absolute;
+  background-color: black;
+  width: 33.33%;
+  height: 50%;
+}
+
+.firstShootHide {
+  left: 0;
+  top: 2%;
+}
+
+.secondShootHide {
+  left: 33.33%;
+  top: 2;
+}
+
+.thirdShootHide {
+  left: 66.66%;
+  top: 2;
 }
 
 .ducksHitsOrMissCounterContainer {
-    display: flex;
-    align-items: center;
-    background-color: black;
-    width: fit-content;
-    padding: 2%;
-    border-radius: 2vw;
-  }
-  
-  .duckHitOrMissIcons {
-    display: flex;
-    flex-direction: row;
-    width: var(--duckHitOrMissIconsWidth);
-  }
-  
-  .duckHitOrMiss1,
-  .duckHitOrMiss2,
-  .duckHitOrMiss3,
-  .duckHitOrMiss4,
-  .duckHitOrMiss5,
-  .duckHitOrMiss6 {
-    width: 16.67%;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .duckHitOrMissIcons > div > img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  
-  .hits {
-    color: white;
-    font-size: calc(var(--duckHitOrMissIconsWidth)/6);
-    white-space: nowrap;
-  }
+  display: flex;
+  align-items: center;
+  background-color: black;
+  width: fit-content;
+  padding: 2%;
+  border-radius: 2vw;
+}
+
+.duckHitOrMissIcons {
+  display: flex;
+  flex-direction: row;
+  width: var(--duckHitOrMissIconsWidth);
+}
+
+.duckHitOrMiss1,
+.duckHitOrMiss2,
+.duckHitOrMiss3,
+.duckHitOrMiss4,
+.duckHitOrMiss5,
+.duckHitOrMiss6 {
+  width: 16.67%;
+  padding: 0;
+  margin: 0;
+}
+
+.duckHitOrMissIcons > div > img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hits {
+  color: white;
+  font-size: calc(var(--duckHitOrMissIconsWidth) / 6);
+  white-space: nowrap;
+}
