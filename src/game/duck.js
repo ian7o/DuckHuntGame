@@ -1,18 +1,16 @@
-import { duckUi } from "../ui/ui.js";
-
-
-const duckPositions = {
-    initialDuckPosition: {
-        PositionX : -130,
-        PositionY : -121
-    },
-    secondDuckPosition: {
-        PositionX : -170,
+//import { duckUi } from "../ui/ui.js";
+export const duckPositions = {
+	initialDuckPosition: {
+		PositionX: -130,
+		PositionY: -121,
+	},
+	secondDuckPosition: {
+		PositionX: -170,
 		PositionY: -123,
 	},
 	thirdDuckPosition: {
-		PositionX: -221,
-		PositionY: -119,
+		PositionX: -211,
+		PositionY: -121,
 	},
 	duckGetShot: {
 		PositionX: -131,
@@ -23,15 +21,52 @@ const duckPositions = {
 		PositionY: -237,
 	},
 };
+// Get the first game area element
+const gameArea = document.querySelector(".gameArea");
 
-const gameArea = document.querySelector(".game-area");
-let gameAreaWidth = gameArea.offsetWidth;
+// Only create and append duck if gameArea exists
+if (gameArea) {
+	const duck = document.createElement("div");
+	// Add the necessary classes for sprite display
+	duck.classList.add("duck");
+	duck.classList.add("sprite-duck");
+	// Set the background position
+	duck.style.backgroundPosition = `${duckPositions.initialDuckPosition.PositionX}px ${duckPositions.initialDuckPosition.PositionY}px`;
+	gameArea.appendChild(duck);
 
+	// Start the duck movement
+	duckMove(duck);
+}
 
-const duck = document.createElement("div");
-gameArea.appendChild(duck);
-duck.classList.add(`sprite-duck${duckPositions.initialDuckPosition.PositionX}
-    ${duckPositions.initialDuckPosition.PositionY}`);
+function duckMove(duck) {
+	// Define the number of frames in the sprite sheet (3 frames)
+	const totalFrames = 3;
+	let currentFrame = 0;
 
+	// Set initial position of the duck
+	let xPos = 0;
+	let yPos = window.innerHeight / 2; // Start at the center of the window
 
+	// Update the sprite's position and frame every second
+	setInterval(() => {
+		// Update the current frame of the sprite
+		currentFrame = (currentFrame + 1) % totalFrames;
 
+		// Set the background position to show the correct frame
+		// Using the predefined positions from duckPositions
+		const positions = [
+			duckPositions.initialDuckPosition,
+			duckPositions.secondDuckPosition,
+			duckPositions.thirdDuckPosition,
+		];
+		const currentPosition = positions[currentFrame];
+		duck.style.backgroundPosition = `${currentPosition.PositionX}px ${currentPosition.PositionY}px`;
+
+		// Move the duck smoothly around the screen
+		xPos = (xPos + 10) % window.innerWidth; // Move the duck horizontally
+		yPos = (yPos + 0) % window.innerHeight; // Move the duck vertically
+
+		// Apply the new position with scale
+		duck.style.transform = `translate(${xPos}px, ${yPos}px) scale(2)`;
+	}, 150); // Update every 1 second
+}

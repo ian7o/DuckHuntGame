@@ -1,8 +1,25 @@
 * {
-  margin: 0;
+	background-color: skyblue;
+    margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+.sprite-duck {
+	background: url("assets/DuckHuntSprites.png") no-repeat;
+	width: 34px;
+	height: 31px;
+	position: absolute;
+	transform: scale(2); /* Makes the duck 2x bigger */
+	transform-origin: center center; /* Ensures scaling happens from the center */
+}
+
+.duck {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 :root {
   --duckHitOrMissIconsWidth: 25vw;
   --scoreContainerWidth: 15vw;
@@ -41,24 +58,6 @@
 }
 .bushContainer img {
   width: 100%;
-}
-.duck {
-  position: absolute;
-}
-.sprite-duck {
-  background: url('assets/DuckHuntSprites.png') no-repeat var(--positionX, 0) var(--positionY, 0);
-  width: 34px;
-  height: 24px;
-}
-.secondDuckPosition {
-  background: url('assets/DuckHuntSprites.png') no-repeat -170px -123px;
-  width: 34px;
-  height: 20px;
-}
-.thirdDuckPosition {
-  background: url('assets/DuckHuntSprites.png') no-repeat -211px -119px;
-  width: 32px;
-  height: 28px;
 }
 .duckGetShot {
   background: url('assets/DuckHuntSprites.png') no-repeat -131px -238px;

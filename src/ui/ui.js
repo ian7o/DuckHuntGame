@@ -1,5 +1,3 @@
-
-
 export const Duck = () => {
 	const duck = document.createElement("div");
 	duck.classList.add("duck");
