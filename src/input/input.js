@@ -1,25 +1,26 @@
-export const Positions = () => {
-    let mouseX;
-    let mouseY;
-  
-    document.addEventListener("mousemove", function (mousePosition) {
-      mouseX = mousePosition.clientX;
-      mouseY = mousePosition.clientY;
-  
-      function getMouseXPosition() {
-        return mouseX;
-      }
-  
-      function getMouseYPosition() {
-        return mouseY;
-      }
-  
-      console.log(`Mouse X: ${getMouseXPosition()}, Mouse Y: ${getMouseYPosition()}`);
-    });
-  
-  
-    return {
-      getMouseXPosition,
-      getMouseYPosition
-    };
-  }
+export const InputHandler = () => {
+	let mouseX;
+	let mouseY;
+
+	function trackMouse() {
+		document.addEventListener("click", function (mousePosition) {
+			mouseX = mousePosition.clientX;
+			mouseY = mousePosition.clientY;
+			console.log(`Mouse X: ${mouseX}, Mouse Y: ${mouseY}`);
+		});
+	}
+
+	function getMouseXPosition() {
+		return mouseX;
+	}
+
+	function getMouseYPosition() {
+		return mouseY;
+	}
+
+	return {
+		getMouseXPosition,
+		getMouseYPosition,
+		trackMouse,
+	};
+};
