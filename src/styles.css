@@ -1,0 +1,214 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --duckHitOrMissIconsWidth: 25vw;
+  --scoreContainerWidth: 15vw;
+  --roundsContainerWidth: 10vw;
+  --gameAreaHeight: 35vw;
+  --border-radius: 16px;
+  --container-height: 80px;
+  --text-color: white;
+  --bg-color: black;
+  --font-size: 24px;
+}
+.gameContainer {
+  height: 100vh;
+  background-color: skyblue;
+}
+.gameArea {
+  display: flex;
+  height: 80vh;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+.treeContainer {
+  height: fit-content;
+  z-index: 0;
+  bottom: -8%;
+}
+.treeContainer img {
+  width: 400px;
+}
+.bushContainer {
+  position: relative;
+  width: 250px;
+  height: fit-content;
+  bottom: -10%;
+  z-index: 0;
+}
+.bushContainer img {
+  width: 100%;
+}
+.duck {
+  position: absolute;
+}
+.sprite-duck {
+  background: url('assets/DuckHuntSprites.png') no-repeat var(--positionX, 0) var(--positionY, 0);
+  width: 34px;
+  height: 24px;
+}
+.secondDuckPosition {
+  background: url('assets/DuckHuntSprites.png') no-repeat -170px -123px;
+  width: 34px;
+  height: 20px;
+}
+.thirdDuckPosition {
+  background: url('assets/DuckHuntSprites.png') no-repeat -211px -119px;
+  width: 32px;
+  height: 28px;
+}
+.duckGetShot {
+  background: url('assets/DuckHuntSprites.png') no-repeat -131px -238px;
+  width: 31px;
+  height: 29px;
+}
+.duckFalling {
+  background: url('assets/DuckHuntSprites.png') no-repeat -178px -237px;
+  width: 18px;
+  height: 30px;
+}
+.infoGrassContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  height: 20vh;
+}
+.grass {
+  position: absolute;
+  width: 100%;
+}
+.grass img {
+  width: 100%;
+  height: 300px;
+}
+.shootsContainer,
+.roundsContainer,
+.ducksHitsOrMissCounterContainer,
+.scoreContainer {
+  z-index: 1;
+  margin-bottom: 8px;
+  border-radius: var(--border-radius);
+}
+.shootsContainer {
+  position: relative;
+  width: 100px;
+  height: var(--container-height);
+}
+.shootsContainer > img {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--border-radius);
+}
+.bulletsContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.firstShootHide,
+.secondShootHide,
+.thirdShootHide {
+  position: absolute;
+  background-color: var(--bg-color);
+  width: 33.33%;
+  height: 55%;
+  border-radius: var(--border-radius);
+}
+
+.firstShootHide {
+  left: 0;
+  top: 0;
+}
+
+.secondShootHide {
+  left: 33.33%;
+  top: 0;
+}
+
+.thirdShootHide {
+  left: 66.66%;
+  top: 0;
+}
+
+/* Score container */
+.scoreContainer {
+  display: flex;
+  position: relative;
+  background-color: var(--bg-color);
+  justify-content: center;
+  align-items: center;
+  width: var(--scoreContainerWidth);
+  height: var(--container-height);
+}
+
+.scoreContainer > p {
+  color: var(--text-color);
+  margin-right: 5px;
+  font-size: var(--font-size);
+}
+
+.scoreCounter {
+  align-items: center;
+  color: var(--text-color);
+  font-size: var(--font-size);
+}
+
+/* Rounds container */
+.roundsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-color);
+  width: var(--roundsContainerWidth);
+  height: var(--container-height);
+}
+
+.roundsContainer > span {
+  color: var(--text-color);
+  font-size: var(--font-size);
+}
+
+/* Ducks hit/miss counter */
+.ducksHitsOrMissCounterContainer {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-color);
+  width: fit-content;
+  height: var(--container-height);
+}
+
+.duckHitOrMissIcons {
+  display: flex;
+  flex-direction: row;
+  width: var(--duckHitOrMissIconsWidth);
+  padding: 0 4px;
+}
+
+.duckHitOrMiss1,
+.duckHitOrMiss2,
+.duckHitOrMiss3,
+.duckHitOrMiss4,
+.duckHitOrMiss5,
+.duckHitOrMiss6 {
+  width: 16.67%;
+  padding: 0;
+  margin: 0;
+}
+
+.duckIcon {
+  margin-right: 4px;
+}
+
+.duckHitOrMissIcons > div > img {
+  width: 100%;
+  height: auto;
+}
+
+.redDuck {
+  display: none;
+}
