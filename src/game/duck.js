@@ -1,5 +1,4 @@
 //import { duckUi } from "../ui/ui.js";
-
 export const duckPositions = {
 	initialDuckPosition: {
 		PositionX: -130,
@@ -22,7 +21,6 @@ export const duckPositions = {
 		PositionY: -237,
 	},
 };
-
 // Get the first game area element
 const gameArea = document.querySelector(".gameArea");
 

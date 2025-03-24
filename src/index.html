@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Duck Hunt Game</title>
+
 </head>
 
 <body>
@@ -17,60 +18,67 @@
         <div class="gameContainer">
             <div class="gameArea">
                 <!-- z index of images are 0 -->
-                <div class="initialDuckPosition"></div>
-                <div class="treeContainer"></div>
-                <div class="bushContainer"></div>
+                <div class="treeContainer">
+                    <img src="./assets/tree.png" alt="" />
+                </div>
+                <div class="bushContainer">
+                    <img src="./assets/bush.png" alt="" />
+                </div>
             </div>
             <!-- background can be the grass images -->
             <div class="infoGrassContainer">
-                <div class="shootsContaienr">
-                    <!-- shoots image is background every shoot made div by div will appear -->
-                    <div class="firstShootHide"></div>
-                    <div class="secondShootHide"></div>
-                    <div class="thirdShootHide"></div>
+                <div class="grass"><img src="./assets/grass.png" alt=""></div>
+                <div class="shootsContainer">
+                    <img src="./assets/shoots.png" alt="" />
+                    <div class="bulletsContainer">
+                        <div class="firstShootHide"></div>
+                        <div class="secondShootHide"></div>
+                        <div class="thirdShootHide"></div>
+                    </div>
                 </div>
-                <div class="RoundsContainer">
+                <div class="roundsContainer">
                     <span>Round</span>
                     <span class="roundCounter"></span>
                 </div>
-                <div class="ducksHitsCounterContainer">
-                    <span>Hits</span>
-                    <div class="ducks">
-                        <div class="duckHitOrMiss1">
-                            //duck image white is default and red is when hit
-                            <img class="whiteDuck" src="./assets/duckWhite.png" alt="">
-                            <img class="redDuck" src="./assets/duckRed.png" alt="">
+                <div class="ducksHitsOrMissCounterContainer">
+                    <div class="duckHitOrMissIcons info">
+                        <div class="duckHitOrMiss1 duckIcon">
+                            <!-- duck image white is default and red is when hit  -->
+                            <img class="whiteDuck" src="./assets/duckWhite.png" alt="" />
+                            <img class="redDuck" src="./assets/duckRed.png" alt="" />
                         </div>
-                        <div class="duckHitOrMiss2">
-                            <img class="whiteDuck" src="./assets/duckWhite.png" alt="">
-                            <img class="redDuck" src="./assets/duckRed.png" alt="">
+                        <div class="duckHitOrMiss2 duckIcon">
+                            <img class="whiteDuck" src="./assets/duckWhite.png" alt="" />
+                            <img class="redDuck" src="./assets/duckRed.png" alt="" />
                         </div>
-                        <div class="duckHitOrMiss3">
-                            <img class="whiteDuck" src="./assets/duckWhite.png" alt="">
-                            <img class="redDuck" src="./assets/duckRed.png" alt="">
+                        <div class="duckHitOrMiss3 duckIcon">
+                            <img class="whiteDuck" src="./assets/duckWhite.png" alt="" />
+                            <img class="redDuck" src="./assets/duckRed.png" alt="" />
                         </div>
-                        <div class="duckHitOrMiss4">
-                            <img class="whiteDuck" src="./assets/duckWhite.png" alt="">
-                            <img class="redDuck" src="./assets/duckRed.png" alt="">
+                        <div class="duckHitOrMiss4 duckIcon">
+                            <img class="whiteDuck" src="./assets/duckWhite.png" alt="" />
+                            <img class="redDuck" src="./assets/duckRed.png" alt="" />
                         </div>
-                        <div class="duckHitOrMiss5">
-                            <img class="whiteDuck" src="./assets/duckWhite.png" alt="">
-                            <img class="redDuck" src="./assets/duckRed.png" alt="">
+                        <div class="duckHitOrMiss5 duckIcon">
+                            <img class="whiteDuck" src="./assets/duckWhite.png" alt="" />
+                            <img class="redDuck" src="./assets/duckRed.png" alt="" />
                         </div>
-                        <div class="duckHitOrMiss6">
-                            <img class="whiteDuck" src="./assets/duckWhite.png" alt="">
-                            <img class="redDuck" src="./assets/duckRed.png" alt="">
+                        <div class="duckHitOrMiss6 duckIcon">
+                            <img class="whiteDuck" src="./assets/duckWhite.png" alt="" />
+                            <img class="redDuck" src="./assets/duckRed.png" alt="" />
                         </div>
                     </div>
                 </div>
-                <div class="scoreContaienr">
-                    <span class="scoreCounter">0</span>
+                <div class="scoreContainer">
+                    <p>Score:</p>
+                    <span class="scoreCounter"> 0</span>
                 </div>
             </div>
         </div>
     </main>
     <script type="module" src="./game/duck.js"></script>
     <script type="module" src="./ui/ui.js"></script>
+
 </body>
 
 </html>
