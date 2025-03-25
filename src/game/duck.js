@@ -27,19 +27,15 @@ const gameArea = document.querySelector(".gameArea");
 // Only create and append duck if gameArea exists
 if (gameArea) {
 	const duck = document.createElement("div");
-	// Add the necessary classes for sprite display
 	duck.classList.add("duck");
 	duck.classList.add("sprite-duck");
-	// Set the background position
 	duck.style.backgroundPosition = `${duckPositions.initialDuckPosition.PositionX}px ${duckPositions.initialDuckPosition.PositionY}px`;
 	gameArea.appendChild(duck);
 
-	// Start the duck movement
 	duckMove(duck);
 }
 
 function duckMove(duck) {
-	// Define the number of frames in the sprite sheet (3 frames)
 	const totalFrames = 3;
 	let currentFrame = 0;
 
@@ -47,9 +43,7 @@ function duckMove(duck) {
 	let xPos = 0;
 	let yPos = window.innerHeight / 2; // Start at the center of the window
 
-	// Update the sprite's position and frame every second
 	setInterval(() => {
-		// Update the current frame of the sprite
 		currentFrame = (currentFrame + 1) % totalFrames;
 
 		// Set the background position to show the correct frame
@@ -66,7 +60,6 @@ function duckMove(duck) {
 		xPos = (xPos + 10) % window.innerWidth; // Move the duck horizontally
 		yPos = (yPos + 0) % window.innerHeight; // Move the duck vertically
 
-		// Apply the new position with scale
 		duck.style.transform = `translate(${xPos}px, ${yPos}px) scale(2)`;
-	}, 150); // Update every 1 second
+	}, 150); 
 }
