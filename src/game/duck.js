@@ -1,4 +1,3 @@
-//import { duckUi } from "../ui/ui.js";
 export const duckPositions = {
 	initialDuckPosition: {
 		PositionX: -130,
@@ -21,6 +20,7 @@ export const duckPositions = {
 		PositionY: -237,
 	},
 };
+
 // Get the first game area element
 const gameArea = document.querySelector(".gameArea");
 
@@ -28,24 +28,23 @@ const gameArea = document.querySelector(".gameArea");
 if (gameArea) {
 	const duck = document.createElement("div");
 	// Add the necessary classes for sprite display
-	duck.classList.add("duck");
 	duck.classList.add("sprite-duck");
 	// Set the background position
 	duck.style.backgroundPosition = `${duckPositions.initialDuckPosition.PositionX}px ${duckPositions.initialDuckPosition.PositionY}px`;
 	gameArea.appendChild(duck);
 
 	// Start the duck movement
-	duckMove(duck);
+	duckMove(duck, gameArea);
 }
 
-function duckMove(duck) {
+function duckMove(duck, container) {
 	// Define the number of frames in the sprite sheet (3 frames)
 	const totalFrames = 3;
 	let currentFrame = 0;
 
 	// Set initial position of the duck
 	let xPos = 0;
-	let yPos = window.innerHeight / 2; // Start at the center of the window
+	let yPos = container.clientHeight / 2; // Start at the center of the gameArea
 
 	// Update the sprite's position and frame every second
 	setInterval(() => {
@@ -63,8 +62,8 @@ function duckMove(duck) {
 		duck.style.backgroundPosition = `${currentPosition.PositionX}px ${currentPosition.PositionY}px`;
 
 		// Move the duck smoothly around the screen
-		xPos = (xPos + 10) % window.innerWidth; // Move the duck horizontally
-		yPos = (yPos + 0) % window.innerHeight; // Move the duck vertically
+		xPos = (xPos + 10) % container.clientWidth; // Move the duck horizontally
+		yPos = (yPos + 0) % container.clientHeight; // Move the duck vertically
 
 		// Apply the new position with scale
 		duck.style.transform = `translate(${xPos}px, ${yPos}px) scale(2)`;
