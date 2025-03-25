@@ -1,5 +1,12 @@
 //import { duckUi } from "../ui/ui.js";
 export const duckPositions = {
+	duckFall: {
+		PositionX: -178,
+		PositionY: -237,
+	},
+};
+
+const duckMoveFront = {
 	initialDuckPosition: {
 		PositionX: -130,
 		PositionY: -121,
@@ -12,31 +19,30 @@ export const duckPositions = {
 		PositionX: -211,
 		PositionY: -121,
 	},
-
-
-
-	flyInitialDuckPosition: {
+}
+const duckPositionFly = {
+	initialDuckPosition: {
 		PositionX: -134,
 		PositionY: -157,
 	},
-	flySecondDuckPosition: {
+	secondDuckPosition: {
 		PositionX: -171,
 		PositionY: -158,
 	},
-	flyThirdDuckPosition: {
+	thirdDuckPosition: {
 		PositionX: -213,
 		PositionY: -157,
 	},
-	duckFall: {
-		PositionX: -178,
-		PositionY: -237,
-	},
-};
+}
 
-
-
-
-
+const moveSet = {
+	duckMoveHorizontaRight: { moveX: 10, moveY: 0, transform: (x, y) => `translate(${x}px, ${y}px) scale(2)` },
+	duckMoveHorizontaLeft: { moveX: -10, moveY: 0, transform: (x, y) => `translate(${x}px, ${y}px) rotate(334deg) rotateY(163deg) scale(2)` },
+	duckDiagonaHigheRight: { moveX: 10, moveY: -10, transform: (x, y) => `translate(${x}px, ${y}px) scale(2)` },
+	duckDiagonaHigheLeft: { moveX: -10, moveY: -10, transform: (x, y) => `translate(${x}px, ${y}px) rotateY(150deg) scale(2)` },
+	duckDiagonaLowerRight: { moveX: 10, moveY: 10, transform: (x, y) => `translate(${x}px, ${y}px) rotate(90deg) scale(2)` },
+	duckDiagonaLowerLeft: { moveX: -10, moveY: +10, transform: (x, y) => `translate(${x}px, ${y}px) rotate(-90deg) rotateY(180deg) scale(2) ` },
+}
 
 // Get the first game area element
 const gameArea = document.querySelector(".gameArea");
@@ -46,32 +52,21 @@ if (gameArea) {
 	const duck = document.createElement("div");
 	duck.classList.add("duck");
 	duck.classList.add("sprite-duck");
+	// Set the background position
 	duck.style.backgroundPosition = `${duckPositions.initialDuckPosition.PositionX}px ${duckPositions.initialDuckPosition.PositionY}px`;
 	gameArea.appendChild(duck);
 
-	// Start the duck movement
-	//duckMove(duck);
-	duckflyForRightUp(duck);
-	//duckflyForLeftUp(duck);
-	//duckflyForRightDown(duck);
-	//duckflyForLeftDown(duck);
-
-
-
+	startAnimationWith3Frames(duck, duckMoveFront, moveSet.duckDiagonaLowerLeft)
 }
 //nao sei um nome melhor para o positionsLocated mas é so para ficar dinamico mas é onde ele vai buscar o set de animaçoes
 
 
-
-
-
-
-function duckMove(duck) {
+function startAnimationWith3Frames(duck, duckAnimationSet, movement) {
 	const totalFrames = 3;
 	let currentFrame = 0;
 
 	// Start at the left edge of the game area
-	let xPos = -50; // Start slightly off-screen
+	let xPos = 0; // Start slightly off-screen
 	let yPos = gameArea.getBoundingClientRect().height / 2;
 
 	const gameAreaWidth = gameArea.getBoundingClientRect().width;
@@ -80,23 +75,23 @@ function duckMove(duck) {
 		currentFrame = (currentFrame + 1) % totalFrames;
 
 		const positions = [
-			duckPositions.initialDuckPosition,
-			duckPositions.secondDuckPosition,
-			duckPositions.thirdDuckPosition,
+			duckAnimationSet.initialDuckPosition,
+			duckAnimationSet.secondDuckPosition,
+			duckAnimationSet.thirdDuckPosition,
 		];
 		const currentPosition = positions[currentFrame];
 		duck.style.backgroundPosition = `${currentPosition.PositionX}px ${currentPosition.PositionY}px`;
 
 		// Move horizontally
-		xPos += 10;
-
-		// Reset position when duck goes off-screen
+		xPos += movement.moveX;
+		yPos += movement.moveY;
 		if (xPos > gameAreaWidth) {
+			// Reset position when duck goes off-screen
 			xPos = -50; // Reset to left side
 		}
-
 		// Apply the new position with scale
-		duck.style.transform = `translate(${xPos}px, ${yPos}px) scale(2)`;
+		duck.style.transform = movement.transform(xPos, yPos);
+		return currentFrame;
 	}, 150);
 }
 
