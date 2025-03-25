@@ -1,5 +1,3 @@
-    @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
-
 * {
 	font-family: 'Pixelify Sans', monospace;
   margin: 0;
@@ -14,28 +12,34 @@
 	transform: scale(2); /* Makes the duck 2x bigger */
 	transform-origin: center center; /* Ensures scaling happens from the center */
 }
-
-.duck {
-	position: absolute;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+.sprite-dog {
+	background: url('assets/DuckHuntSprites.png') no-repeat;
+	width: 53px;
+	height: 40px;
+    transform: scale(3);
+    transform-origin: center center;
+    z-index: 10;
+    top: 49%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 :root {
-  --duckHitOrMissIconsWidth: 25vw;
-  --scoreContainerWidth: 15vw;
-  --roundsContainerWidth: 10vw;
-  --gameAreaHeight: 35vw;
-  --border-radius: 16px;
-  --container-height: 80px;
-  --text-color: white;
-  --bg-color: black;
-  --font-size: 24px;
+	--duckHitOrMissIconsWidth: 25vw;
+	--scoreContainerWidth: 15vw;
+	--roundsContainerWidth: 10vw;
+	--gameAreaHeight: 35vw;
+	--border-radius: 16px;
+	--container-height: 80px;
+	--text-color: white;
+	--bg-color: black;
+	--font-size: 24px;
 }
 .gameContainer {
-  height: 100vh;
-  background-color: skyblue;
+	height: 100vh;
+	background-color: skyblue;
 }
 .gameArea {
   display: flex;
@@ -59,7 +63,7 @@
 	bottom: -20%;
 }
 .bushContainer img {
-  width: 100%;
+	width: 100%;
 }
 .treeContainer,.bushContainer{
   z-index: 0;
@@ -232,8 +236,8 @@
   position: absolute;
   width: 32px;
   height: 32px;
-  pointer-events: none; 
-  z-index: 9999; 
+  pointer-events: none;
+  z-index: 9999;
 }
 
 .crosshair.aim {
