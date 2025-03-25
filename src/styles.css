@@ -226,3 +226,26 @@
 .redDuck {
   display: none;
 }
+
+/* *CROSSHAIR */
+.crosshair {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  pointer-events: none; 
+  z-index: 9999; 
+}
+
+.crosshair.aim {
+  background: url("assets/crosshair.png") no-repeat center center;
+  background-size: contain;
+}
+
+.crosshair.forbidden {
+  background: url("assets/forbbiden.png") no-repeat center center;
+  background-size: contain;
+}
+
+body.crosshair-active {
+  cursor: none;
+}
