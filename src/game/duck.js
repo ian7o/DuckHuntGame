@@ -12,28 +12,29 @@ export const duckPositions = {
 		PositionX: -211,
 		PositionY: -121,
 	},
-	duckGetShot: {
-		PositionX: -131,
-		PositionY: -238,
+
+
+
+	flyInitialDuckPosition: {
+		PositionX: -134,
+		PositionY: -157,
+	},
+	flySecondDuckPosition: {
+		PositionX: -171,
+		PositionY: -158,
+	},
+	flyThirdDuckPosition: {
+		PositionX: -213,
+		PositionY: -157,
 	},
 	duckFall: {
 		PositionX: -178,
 		PositionY: -237,
 	},
-
-	flyInitialDuckPosition: {
-		PositionX: -130,
-		PositionY: -121,
-	},
-	flySecondDuckPosition: {
-		PositionX: -170,
-		PositionY: -123,
-	},
-	flyThirdDuckPosition: {
-		PositionX: -211,
-		PositionY: -121,
-	}
 };
+
+
+
 
 
 
@@ -48,11 +49,20 @@ if (gameArea) {
 	duck.style.backgroundPosition = `${duckPositions.initialDuckPosition.PositionX}px ${duckPositions.initialDuckPosition.PositionY}px`;
 	gameArea.appendChild(duck);
 
-	// Start the duck movement (currently commented out)
+	// Start the duck movement
+	//duckMove(duck);
+	duckflyForRightUp(duck);
 	//duckflyForLeftUp(duck);
-	//duckMove(duck)
-	duckflyForRightUp(duck)
+	//duckflyForRightDown(duck);
+	//duckflyForLeftDown(duck);
+
+
+
 }
+//nao sei um nome melhor para o positionsLocated mas é so para ficar dinamico mas é onde ele vai buscar o set de animaçoes
+
+
+
 
 
 
@@ -60,13 +70,13 @@ function duckMove(duck) {
 	const totalFrames = 3;
 	let currentFrame = 0;
 
-	// Set initial position of the duck
-	let xPos = 0;
-	let yPos = window.innerHeight / 2; // Start at the center of the window
+	// Start at the left edge of the game area
+	let xPos = -50; // Start slightly off-screen
+	let yPos = gameArea.getBoundingClientRect().height / 2;
 
-	// Update the sprite's position and frame every second
-	setInterval(() => {
-		// Update the current frame of the sprite
+	const gameAreaWidth = gameArea.getBoundingClientRect().width;
+
+	return setInterval(() => {
 		currentFrame = (currentFrame + 1) % totalFrames;
 
 		const positions = [
@@ -90,17 +100,20 @@ function duckMove(duck) {
 	}, 150);
 }
 
+
 function duckflyForRightUp(duck) {
 	const totalFrames = 3;
-	let currentFrame = 0;
 	let xPos = 0;
+	let currentFrame = 0;
 	let yPos = window.innerHeight / 2; // Start at the center of the window
 
-	return setInterval(() => {
+	// Update the sprite's position and frame every second
+	setInterval(() => {
 		// Update the current frame of the sprite
 		currentFrame = (currentFrame + 1) % totalFrames;
 
 		// Set the background position to show the correct frame
+		// Using the predefined positions from duckPositions
 		const positions = [
 			duckPositions.flyInitialDuckPosition,
 			duckPositions.flySecondDuckPosition,
@@ -111,24 +124,28 @@ function duckflyForRightUp(duck) {
 
 		// Move the duck smoothly around the screen
 		xPos = (xPos + 10) % window.innerWidth; // Move the duck horizontally
-		yPos = (yPos - 10) % window.innerHeight; // Move the duck vertically
+		yPos = (yPos + -10) % window.innerHeight; // Move the duck vertically
 
 		// Apply the new position with scale
 		duck.style.transform = `translate(${xPos}px, ${yPos}px) scale(2)`;
-	}, 150);
+	}, 150); // Update every 1 second
 }
+
+
 
 function duckflyForLeftUp(duck) {
 	const totalFrames = 3;
+	let xPos = 0;
 	let currentFrame = 0;
-	let xPos = window.innerWidth; // Start from the right side of the screen
 	let yPos = window.innerHeight / 2; // Start at the center of the window
 
-	return setInterval(() => {
+	// Update the sprite's position and frame every second
+	setInterval(() => {
 		// Update the current frame of the sprite
 		currentFrame = (currentFrame + 1) % totalFrames;
 
 		// Set the background position to show the correct frame
+		// Using the predefined positions from duckPositions
 		const positions = [
 			duckPositions.flyInitialDuckPosition,
 			duckPositions.flySecondDuckPosition,
@@ -143,20 +160,24 @@ function duckflyForLeftUp(duck) {
 
 		// Apply the new position with scale
 		duck.style.transform = `translate(${xPos}px, ${yPos}px) rotateY(150deg) scale(2)`;
-	}, 150);
+	}, 150); // Update every 1 second
 }
+
+
 
 function duckflyForRightDown(duck) {
 	const totalFrames = 3;
-	let currentFrame = 0;
 	let xPos = 0;
+	let currentFrame = 0;
 	let yPos = window.innerHeight / 2; // Start at the center of the window
 
-	return setInterval(() => {
+	// Update the sprite's position and frame every second
+	setInterval(() => {
 		// Update the current frame of the sprite
 		currentFrame = (currentFrame + 1) % totalFrames;
 
 		// Set the background position to show the correct frame
+		// Using the predefined positions from duckPositions
 		const positions = [
 			duckPositions.flyInitialDuckPosition,
 			duckPositions.flySecondDuckPosition,
@@ -167,8 +188,40 @@ function duckflyForRightDown(duck) {
 
 		// Move the duck smoothly around the screen
 		xPos = (xPos + 10) % window.innerWidth; // Move the duck horizontally
-		yPos = (yPos + 0) % window.innerHeight; // Move the duck vertically
+		yPos = (yPos + 10) % window.innerHeight; // Move the duck vertically
 
-		duck.style.transform = `translate(${xPos}px, ${yPos}px) scale(2)`;
+		// Apply the new position with scale
+		duck.style.transform = `translate(${xPos}px, ${yPos}px) rotate(90deg) scale(2) `;
 	}, 150); // Update every 1 second
+}
+
+
+function duckflyForLeftDown(duck) {
+	const totalFrames = 3;
+	let xPos = 0;
+	let currentFrame = 0;
+	let yPos = window.innerHeight / 2; // Start at the center of the window
+
+	// Update the sprite's position and frame every second
+	setInterval(() => {
+		// Update the current frame of the sprite
+		currentFrame = (currentFrame + 1) % totalFrames;
+
+		// Set the background position to show the correct frame
+		// Using the predefined positions from duckPositions
+		const positions = [
+			duckPositions.flyInitialDuckPosition,
+			duckPositions.flySecondDuckPosition,
+			duckPositions.flyThirdDuckPosition,
+		];
+		const currentPosition = positions[currentFrame];
+		duck.style.backgroundPosition = `${currentPosition.PositionX}px ${currentPosition.PositionY}px`;
+
+		// Move the duck smoothly around the screen
+		xPos = (xPos - 10) % window.innerWidth; // Move the duck horizontally
+		yPos = (yPos + 10) % window.innerHeight; // Move the duck vertically
+
+		// Apply the new position with scale
+		duck.style.transform = `translate(${xPos}px, ${yPos}px) scale(2)`;
+	}, 150);
 }
