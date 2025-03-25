@@ -1,6 +1,8 @@
+    @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
 * {
-	background-color: skyblue;
-    margin: 0;
+	font-family: 'Pixelify Sans', monospace;
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
@@ -37,27 +39,30 @@
 }
 .gameArea {
   display: flex;
-  height: 80vh;
+  height: 60vh;
   justify-content: space-around;
   align-items: flex-end;
 }
 .treeContainer {
   height: fit-content;
   z-index: 0;
-  bottom: -8%;
+  position: relative;
+  bottom: -10%;
 }
 .treeContainer img {
   width: 400px;
 }
 .bushContainer {
   position: relative;
-  width: 250px;
+  width: 300px;
   height: fit-content;
-  bottom: -10%;
-  z-index: 0;
+	bottom: -20%;
 }
 .bushContainer img {
   width: 100%;
+}
+.treeContainer,.bushContainer{
+  z-index: 0;
 }
 .duckGetShot {
   background: url('assets/DuckHuntSprites.png') no-repeat -131px -238px;
@@ -69,20 +74,28 @@
   width: 18px;
   height: 30px;
 }
-.infoGrassContainer {
-  width: 100%;
+.infoGrassContainer{
+  height: 40vh;
   display: flex;
-  justify-content: space-evenly;
-  align-items: flex-end;
-  height: 20vh;
+  flex-direction: column;
 }
 .grass {
-  position: absolute;
   width: 100%;
 }
 .grass img {
   width: 100%;
   height: 300px;
+  z-index: 2;
+  position: relative;
+}
+.infoContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  background-color: #887000;
+  margin-top: -8px;
+  height: 200px;
 }
 .shootsContainer,
 .roundsContainer,
@@ -90,17 +103,38 @@
 .scoreContainer {
   z-index: 1;
   margin-bottom: 8px;
-  border-radius: var(--border-radius);
+  border-radius: 8px;
+	border: 3px solid lightgreen;
+}
+.shootsAndRoundsContainer{
+	width: 120px;
+}
+
+/* Rounds container */
+.roundsContainer {
+  display: flex;
+  align-items: center;
+	padding: 0 8px;
+  justify-content: flex-start;
+  background-color: var(--bg-color);
+  width: 100%;
+  height: 40px;
+}
+
+.roundsContainer > span {
+  color: var(--text-color);
+  font-size: 32px;
 }
 .shootsContainer {
   position: relative;
-  width: 100px;
+  width: 100%;
   height: var(--container-height);
 }
+
 .shootsContainer > img {
   width: 100%;
   height: 100%;
-  border-radius: var(--border-radius);
+  border-radius: 8px;
 }
 .bulletsContainer {
   position: absolute;
@@ -116,7 +150,7 @@
   background-color: var(--bg-color);
   width: 33.33%;
   height: 55%;
-  border-radius: var(--border-radius);
+  border-radius: 8px;
 }
 
 .firstShootHide {
@@ -137,39 +171,16 @@
 /* Score container */
 .scoreContainer {
   display: flex;
+	padding-right: 8px;
+	font-size: 32px;
+	flex-direction: column;
   position: relative;
   background-color: var(--bg-color);
   justify-content: center;
-  align-items: center;
-  width: var(--scoreContainerWidth);
+  align-items: flex-end;
+  width: 160px;
   height: var(--container-height);
-}
-
-.scoreContainer > p {
-  color: var(--text-color);
-  margin-right: 5px;
-  font-size: var(--font-size);
-}
-
-.scoreCounter {
-  align-items: center;
-  color: var(--text-color);
-  font-size: var(--font-size);
-}
-
-/* Rounds container */
-.roundsContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--bg-color);
-  width: var(--roundsContainerWidth);
-  height: var(--container-height);
-}
-
-.roundsContainer > span {
-  color: var(--text-color);
-  font-size: var(--font-size);
+	color: white;
 }
 
 /* Ducks hit/miss counter */
@@ -179,8 +190,12 @@
   background-color: var(--bg-color);
   width: fit-content;
   height: var(--container-height);
+	padding-left: 8px ;
 }
-
+.hitsText{
+	color: lightgreen;
+	font-size: 32px;
+}
 .duckHitOrMissIcons {
   display: flex;
   flex-direction: row;
