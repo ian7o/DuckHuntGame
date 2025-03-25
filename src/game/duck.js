@@ -1,4 +1,3 @@
-//import { duckUi } from "../ui/ui.js";
 export const duckPositions = {
 	initialDuckPosition: {
 		PositionX: -130,
@@ -61,5 +60,5 @@ function duckMove(duck) {
 		yPos = (yPos + 0) % window.innerHeight; // Move the duck vertically
 
 		duck.style.transform = `translate(${xPos}px, ${yPos}px) scale(2)`;
-	}, 150); 
+	}, 150);
 }
