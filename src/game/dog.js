@@ -19,6 +19,14 @@ const dogPosition = {
 		PositionX: -245,
 		PositionY: -3,
 	},
+	dogJump: {
+		PositionX: -74,
+		PositionY: -60,
+	},
+	dogJumpSecond: {
+		PositionX: -135,
+		PositionY: -67,
+	},
 };
 
 const gameArea = document.querySelector(".gameArea");
@@ -39,8 +47,10 @@ function dogMove(dog, container) {
 	const totalFrames = 5;
 	let currenctFrame = 0;
 
-	let xPos = 0;
+	let xPos = -700;
 	let yPos = container.clientHeight / 2;
+	const targetX = 50;
+	const moveSpeed = 15;
 
 	setInterval(() => {
 		currenctFrame = (currenctFrame + 1) % totalFrames;
@@ -52,13 +62,29 @@ function dogMove(dog, container) {
 			dogPosition.dogWalkFour,
 			dogPosition.dogWalkFive,
 		];
+
+        const newPosition = [
+            dogPosition.dogJump,
+            dogPosition.dogJumpSecond
+        ]
 		const currentPosition = positions[currenctFrame];
 
 		dog.style.backgroundPosition = `${currentPosition.PositionX}px ${currentPosition.PositionY}px`;
 
-		xPos = (xPos + 10) % container.clientHeight;
-		yPos = (yPos + 0) % container.clientHeight;
+		if (xPos < targetX) {
+			xPos += moveSpeed;
+		}
 
 		dog.style.transform = `translate(${xPos}px, ${yPos}px) scale(3)`;
+
+        
+		if(xPos >= targetX){
+			const currentFrame = 0;
+			const currentPosition = newPosition[currentFrame];
+			dog.style.backgroundPosition = `${currentPosition.PositionX}px ${currentPosition.PositionY}px`;
+            dog.style.transform = `translate(${xPos}px, ${yPos}px) scale(3)`;
+
+            
+		}
 	}, 150);
 }
