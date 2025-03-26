@@ -1,12 +1,9 @@
 import { Crosshair } from './input/crosshair.js';
-
-document.addEventListener('DOMContentLoaded', () => {
-  const crosshair = Crosshair();
-  crosshair.initMouseTracking();
-});
 import { Duck } from './game/duck.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+    const crosshair = Crosshair();
+    crosshair.initMouseTracking();
     const gameArea = document.querySelector('.gameArea');
 
     const duck = Duck();
