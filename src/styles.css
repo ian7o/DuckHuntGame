@@ -11,8 +11,9 @@
 	width: 34px;
 	height: 31px;
 	position: absolute;
-	transform: scale(2); /* Makes the duck 2x bigger */
-	transform-origin: center center; /* Ensures scaling happens from the center */
+	transform: scale(2); 
+	transform-origin: center center; 
+  z-index: 999;
 }
 
 .duck {
