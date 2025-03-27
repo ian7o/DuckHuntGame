@@ -11,16 +11,8 @@
     width: 34px;
     height: 31px;
     position: absolute;
-    transform: scale(2);
-    transform-origin: center center;
+    transform-origin: top left;
     z-index: 99;
-}
-
-.duck {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 :root {
@@ -41,6 +33,7 @@
     background-color: skyblue;
 }
 .gameArea {
+    position: relative;
     display: flex;
     flex-grow: 2;
     justify-content: space-around;
@@ -66,7 +59,7 @@
 }
 .treeContainer,
 .bushContainer {
-    z-index: 0;
+    z-index: 2;
 }
 .duckGetShot {
     background: url('assets/DuckHuntSprites.png') no-repeat -131px -238px;

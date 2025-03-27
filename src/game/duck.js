@@ -1,10 +1,3 @@
-//import { duckUi } from "../ui/ui.js";
-//! implement out of bound for duck flying
-//! implement duck shot
-//! implement duck fall
-//! implement duck score
-//! implement duck miss
-//! implement duck game over
 export const duckPositions = {
     duckFall: {
         PositionX: -178,
@@ -13,10 +6,10 @@ export const duckPositions = {
 };
 
 const duckMoveFront = {
-	duckFall: {
-		PositionX: -178,
-		PositionY: -237,
-	},
+    duckFall: {
+        PositionX: -178,
+        PositionY: -237,
+    },
 };
 
 const duckLinearSprites = {
@@ -33,6 +26,7 @@ const duckLinearSprites = {
         PositionY: -121,
     },
 };
+
 const duckDiagonalSprites = {
     initialDuckPosition: {
         PositionX: -134,
@@ -47,111 +41,223 @@ const duckDiagonalSprites = {
         PositionY: -157,
     },
 };
+
 export const Duck = () => {
     const sprites = {
         linear: duckLinearSprites,
         diagonal: duckDiagonalSprites,
     };
 
-    const movements = {
+    const movementsOptions = {
         moveRight: {
             sprites: sprites.linear,
-            moveX: 10,
+            moveX: 15,
             moveY: 0,
-            transform: (x, y) => `translate(${x}px, ${y}px) scale(2)`,
+            rotation: '',
+            scaleX: 1,
+            scaleY: 1,
         },
         moveLeft: {
             sprites: sprites.linear,
-            moveX: -10,
+            moveX: -15,
             moveY: 0,
-            transform: (x, y) =>
-                `translate(${x}px, ${y}px) rotate(334deg) rotateY(163deg) scale(2)`,
+            rotation: 'rotate(334deg) rotateY(163deg)',
+            scaleX: 1,
+            scaleY: 1,
         },
         diagonalBottomLeftTopRight: {
             sprites: sprites.diagonal,
-            moveX: 10,
-            moveY: -10,
-            transform: (x, y) => `translate(${x}px, ${y}px) scale(2)`,
+            moveX: 15,
+            moveY: -15,
+            rotation: '',
+            scaleX: 1,
+            scaleY: 1,
         },
         diagonalBottomRightTopLeft: {
             sprites: sprites.diagonal,
-            moveX: -10,
-            moveY: -10,
-            transform: (x, y) => `translate(${x}px, ${y}px) rotateY(150deg) scale(2)`,
+            moveX: -15,
+            moveY: -15,
+            rotation: 'rotateY(150deg)',
+            scaleX: 1,
+            scaleY: 1,
         },
         diagonalTopLeftBottomRight: {
             sprites: sprites.diagonal,
-            moveX: 10,
-            moveY: 10,
-            transform: (x, y) => `translate(${x}px, ${y}px) rotate(90deg) scale(2)`,
+            moveX: 15,
+            moveY: 15,
+            rotation: 'rotate(90deg)',
+            scaleX: 1,
+            scaleY: 1,
         },
         diagonalTopRightBottomLeft: {
             sprites: sprites.diagonal,
-            moveX: -10,
-            moveY: +10,
-            transform: (x, y) =>
-                `translate(${x}px, ${y}px) rotate(-90deg) rotateY(180deg) scale(2) `,
+            moveX: -15,
+            moveY: 15,
+            rotation: 'rotate(-90deg) rotateY(180deg)',
+            scaleX: 1,
+            scaleY: 1,
         },
+    };
+
+    const randomBottomTopMovement = () => {
+        const possibleMoves = [
+            movementsOptions.diagonalBottomLeftTopRight,
+            movementsOptions.diagonalBottomRightTopLeft,
+        ];
+        return possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
+    };
+
+    const randomTopBottomMovement = () => {
+        const possibleMoves = [
+            movementsOptions.diagonalTopLeftBottomRight,
+            movementsOptions.diagonalTopRightBottomLeft,
+        ];
+        return possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
     };
 
     const create = gameArea => {
         if (!gameArea) return null;
 
         const duckElement = document.createElement('div');
-        duckElement.classList.add('duck');
         duckElement.classList.add('sprite-duck');
 
-        //setting the initial sprite image position
-        duckElement.style.backgroundPosition = `${sprites.linear.initialDuckPosition.PositionX}px ${sprites.linear.initialDuckPosition.PositionY}px`;
+        duckElement.style.backgroundPosition = `${duckLinearSprites.initialDuckPosition.PositionX}px ${duckLinearSprites.initialDuckPosition.PositionY}px`;
+        duckElement.style.transformOrigin = 'top left';
+
         gameArea.appendChild(duckElement);
 
         return duckElement;
     };
 
-    const move = (duckElement, movementType) => {
-        if (!movements[movementType]) return;
+    const spawn = gameArea => {
+        const duckElement = create(gameArea);
 
-        const movement = movements[movementType];
-        const totalFrames = 3;
-        let currentFrame = 0;
-        const gameArea = duckElement.parentElement;
         const gameAreaWidth = gameArea.getBoundingClientRect().width;
         const gameAreaHeight = gameArea.getBoundingClientRect().height;
-        console.log(gameAreaHeight);
-        
 
-        let xPos = Math.floor(Math.random() * gameAreaWidth); // Start slightly off-screen
-        let yPos = 100;
+        // Calculate initial position
+        let xInitialPos = Math.floor(Math.random() * (gameAreaWidth * 0.8));
+        let yInitialPos = gameAreaHeight;
+        console.log(yInitialPos);
 
-        setInterval(() => {
-            //creating a cycle for the 3 frames of the sprite array from 0 1 2
+        // Set position using left/top
+        duckElement.style.left = `${xInitialPos}px`;
+        duckElement.style.top = `${yInitialPos}px`;
+        duckElement.style.transform = `scale(2)`;
+        duckElement.style.transition = 'top 0.5 ease-out';
+
+        return {
+            duckElement,
+            initialPosition: { x: xInitialPos, y: yInitialPos },
+            movement: randomBottomTopMovement(),
+        };
+    };
+
+    const checkCollisions = (x, y, bounds) => {
+        if (x > bounds.width - bounds.duckWidth) {
+            return { direction: 'right' };
+        }
+        if (x < 0) {
+            return { direction: 'left' };
+        }
+        if (y > bounds.height) {
+            return { direction: 'bottom' };
+        }
+        if (y <= 0) {
+            return { direction: 'top' };
+        }
+        return null;
+    };
+
+    const nextMovement = direction => {
+        switch (direction) {
+            case 'right':
+            case 'left':
+                return direction === 'right'
+                    ? movementsOptions.moveLeft
+                    : movementsOptions.moveRight;
+            case 'top':
+                return randomTopBottomMovement();
+            case 'bottom':
+                return randomBottomTopMovement();
+            default:
+                return null;
+        }
+    };
+
+    const updateSprite = (duckElement, sprites, currentFrame) => {
+        const positions = [
+            sprites.initialDuckPosition,
+            sprites.secondDuckPosition,
+            sprites.thirdDuckPosition,
+        ];
+
+        const currentPosition = positions[currentFrame];
+        duckElement.style.backgroundPosition = `${currentPosition.PositionX}px ${currentPosition.PositionY}px`;
+    };
+
+    const handleDuckEscape = duckElement => {
+        duckElement.remove();
+    };
+
+    const move = (duckElement, movement, initialPosition) => {
+        let currentMovement = movement;
+        let currentFrame = 0;
+        const totalFrames = 3;
+        let collisionCounter = 0;
+
+        const gameArea = duckElement.parentElement;
+        const bounds = {
+            width: gameArea.getBoundingClientRect().width,
+            height: gameArea.getBoundingClientRect().height,
+            duckWidth: duckElement.getBoundingClientRect().width,
+            duckHeight: duckElement.getBoundingClientRect().height,
+        };
+
+        let xPos = initialPosition.x;
+        let yPos = initialPosition.y;
+        let framesCounter = 6
+
+        const animationId = setInterval(() => {
             currentFrame = (currentFrame + 1) % totalFrames;
 
-            const positions = [
-                movement.sprites.initialDuckPosition,
-                movement.sprites.secondDuckPosition,
-                movement.sprites.thirdDuckPosition,
-            ];
+            updateSprite(duckElement, currentMovement.sprites, currentFrame);
 
-            const currentPosition = positions[currentFrame];
-            duckElement.style.backgroundPosition = `${currentPosition.PositionX}px ${currentPosition.PositionY}px`;
+            xPos += currentMovement.moveX;
+            yPos += currentMovement.moveY;
+            console.log(xPos, yPos);
+            
 
-            // Move horizontally
-            xPos += movement.moveX;
-            yPos += movement.moveY;
-            if (xPos > gameAreaWidth) {
-                // Reset position when duck goes off-screen
-                xPos = -50; // Reset to left side
+            if(framesCounter <= 0){
+
+                const collision = checkCollisions(xPos, yPos, bounds);
+                if (collision) {
+                    if (collisionCounter >= 1) {
+                        handleDuckEscape(duckElement);
+                        clearInterval(animationId);
+                        return;
+                    }
+                    currentMovement = nextMovement(collision.direction);
+                    collisionCounter++;
+                }
+            }else{
+                framesCounter--
             }
-            // Apply the new position with scale
-            duckElement.style.transform = movement.transform(xPos, yPos);
+
+            // Update position using left/top properties
+            duckElement.style.left = `${xPos}px`;
+            duckElement.style.top = `${yPos}px`;
+
+            // Set rotation and scale separately
+            duckElement.style.transform = `scale(2) ${currentMovement.rotation}`;
+
             return currentFrame;
         }, 150);
     };
 
     return {
-        create,
+        spawn,
         move,
-        movements,
+        movementsOptions,
     };
 };
