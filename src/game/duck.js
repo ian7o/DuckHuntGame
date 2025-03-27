@@ -1,14 +1,13 @@
-export const duckPositions = {
+import { InputHandler } from '../input/input.js';
+
+export const duckDies = {
     duckFall: {
         PositionX: -178,
         PositionY: -237,
     },
-};
-
-const duckMoveFront = {
-    duckFall: {
-        PositionX: -178,
-        PositionY: -237,
+    duckDead: {
+        PositionX: -131,
+        PositionY: -238,
     },
 };
 
@@ -43,6 +42,8 @@ const duckDiagonalSprites = {
 };
 
 export const Duck = () => {
+    const inputHandler = InputHandler();
+
     const sprites = {
         linear: duckLinearSprites,
         diagonal: duckDiagonalSprites,
@@ -54,48 +55,48 @@ export const Duck = () => {
             moveX: 15,
             moveY: 0,
             rotation: '',
-            scaleX: 1,
-            scaleY: 1,
+            scaleX: 3,
+            scaleY: 3,
         },
         moveLeft: {
             sprites: sprites.linear,
             moveX: -15,
             moveY: 0,
             rotation: 'rotate(334deg) rotateY(163deg)',
-            scaleX: 1,
-            scaleY: 1,
+            scaleX: 3,
+            scaleY: 3,
         },
         diagonalBottomLeftTopRight: {
             sprites: sprites.diagonal,
             moveX: 15,
             moveY: -15,
             rotation: '',
-            scaleX: 1,
-            scaleY: 1,
+            scaleX: 3,
+            scaleY: 3,
         },
         diagonalBottomRightTopLeft: {
             sprites: sprites.diagonal,
             moveX: -15,
             moveY: -15,
             rotation: 'rotateY(150deg)',
-            scaleX: 1,
-            scaleY: 1,
+            scaleX: 3,
+            scaleY: 3,
         },
         diagonalTopLeftBottomRight: {
             sprites: sprites.diagonal,
             moveX: 15,
             moveY: 15,
             rotation: 'rotate(90deg)',
-            scaleX: 1,
-            scaleY: 1,
+            scaleX: 3,
+            scaleY: 3,
         },
         diagonalTopRightBottomLeft: {
             sprites: sprites.diagonal,
             moveX: -15,
             moveY: 15,
             rotation: 'rotate(-90deg) rotateY(180deg)',
-            scaleX: 1,
-            scaleY: 1,
+            scaleX: 3,
+            scaleY: 3,
         },
     };
 
@@ -143,7 +144,7 @@ export const Duck = () => {
         // Set position using left/top
         duckElement.style.left = `${xInitialPos}px`;
         duckElement.style.top = `${yInitialPos}px`;
-        duckElement.style.transform = `scale(2)`;
+        duckElement.style.transform = `scale(3)`;
         duckElement.style.transition = 'top 0.5 ease-out';
 
         return {
@@ -200,6 +201,47 @@ export const Duck = () => {
         duckElement.remove();
     };
 
+    //add shot feature so i need to get input from inputhandler
+    //compare when click happens with where duck currently is
+    const isDied = (duckX, duckY, duckElement, gameAreaHeight) => {
+        const duckWidth = duckElement.getBoundingClientRect().width;
+        const duckHeight = duckElement.getBoundingClientRect().height;
+
+        if (inputHandler.checkHit(duckX, duckY, duckWidth, duckHeight)) {
+            console.log('DUCK HIT');
+
+            //change duck to died
+            duckElement.style.backgroundPosition = `${duckDies.duckDead.PositionX}px ${duckDies.duckDead.PositionY}px`;
+
+            //then to falling and make it fall from current position to y = gameareaheight
+            setTimeout(() => {
+                duckElement.style.backgroundPosition = `${duckDies.duckFall.PositionX}px ${duckDies.duckFall.PositionY}px`;
+
+                let rotation = 0;
+                const fallInterval = setInterval(() => {
+                    rotation += 45; // 45 degress increased each frame
+
+                    const currentY = parseInt(duckElement.style.top);
+                    const newY = currentY + 15;
+
+                    duckElement.style.transform = `scale(3) rotateY(${rotation}deg)`;
+                    duckElement.style.top = `${newY}px`;
+
+                    if (newY >= gameAreaHeight) {
+                        clearInterval(fallInterval);
+                        setTimeout(() => {
+                            duckElement.remove();
+                        }, 200);
+                    }
+                }, 50);
+            }, 250);
+
+            return true;
+        } else {
+            return false;
+        }
+    };
+
     const move = (duckElement, movement, initialPosition) => {
         let currentMovement = movement;
         let currentFrame = 0;
@@ -216,7 +258,7 @@ export const Duck = () => {
 
         let xPos = initialPosition.x;
         let yPos = initialPosition.y;
-        let framesCounter = 6
+        let framesCounter = 6;
 
         const animationId = setInterval(() => {
             currentFrame = (currentFrame + 1) % totalFrames;
@@ -225,11 +267,13 @@ export const Duck = () => {
 
             xPos += currentMovement.moveX;
             yPos += currentMovement.moveY;
-            console.log(xPos, yPos);
-            
 
-            if(framesCounter <= 0){
+            if (isDied(xPos, yPos, duckElement, bounds.height)) {
+                clearInterval(animationId);
+                return;
+            }
 
+            if (framesCounter <= 0) {
                 const collision = checkCollisions(xPos, yPos, bounds);
                 if (collision) {
                     if (collisionCounter >= 1) {
@@ -240,8 +284,8 @@ export const Duck = () => {
                     currentMovement = nextMovement(collision.direction);
                     collisionCounter++;
                 }
-            }else{
-                framesCounter--
+            } else {
+                framesCounter--;
             }
 
             // Update position using left/top properties
@@ -249,7 +293,7 @@ export const Duck = () => {
             duckElement.style.top = `${yPos}px`;
 
             // Set rotation and scale separately
-            duckElement.style.transform = `scale(2) ${currentMovement.rotation}`;
+            duckElement.style.transform = `scale(3) ${currentMovement.rotation}`;
 
             return currentFrame;
         }, 150);
