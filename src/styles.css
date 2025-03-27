@@ -249,3 +249,55 @@
 body.crosshair-active {
   cursor: none;
 }
+
+/*
+*/
+.gameMenuSeparator {
+  height: 400px;
+}
+.mainMenu{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 25%;
+  width: 600px;
+}
+.duckTile {
+  color: #66f001;
+  font-size: 180px;
+  text-shadow: 0px 2px 4px black;
+  z-index: 1;
+  align-self: flex-start;
+}
+.huntTile {
+  color: #ff6800;
+  font-size: 160px;
+  text-shadow: 0px 2px 4px black;
+  z-index: 1;
+  align-self: flex-end;
+}
+
+.playbutton{
+  color: white;
+  font-weight: bold;
+  background-color: #cfcfcf;
+  width: 200px;
+  text-align: center;
+  border-radius: 16px;
+  padding:0 1%;
+  text-shadow: 8px 2px 4px darkslategrey;
+  box-shadow: 8px 4px 4px darkslategrey;
+  font-size: 60px;
+  z-index: 1;
+  align-self: center;
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: darkslategrey;
+}
+
+.playbutton:hover{
+  background-color: #66f001;
+}
+
+.inMenu{
+  visibility: hidden;
+}
