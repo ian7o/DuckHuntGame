@@ -108,8 +108,6 @@ function dogMove(dog, container) {
     } else if (dogStatus === 'landing') {
       const currentPosition = jumpPositions[1];
       dog.style.backgroundPosition = `${currentPosition.PositionX}px ${currentPosition.PositionY}px`;
-      dog.style.width = `${width}px`;
-      dog.style.height = `${height}px`;
       dog.style.transform = `translate3d(1010px, 0px, -0px) scale(3.5)`;
       dog.style.zIndex = 0;
     }
