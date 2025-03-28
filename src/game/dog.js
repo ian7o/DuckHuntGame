@@ -40,9 +40,11 @@ if (gameArea) {
 }
 
 function dogMove(dog, container) {
-  const totalFrames = 5;
-  let currentFrame = 0;
-  let dogStatus = 'walk'; // Initial status
+  const totalWalkFrames = 5;
+  const totalJumpFrames = 2;
+  let currentWalkFrame = 0;
+  let currentJumpFrame = 0;
+  let dogStatus = 'walk';
 
   let xPos = 0;
   let yPos = container.clientHeight / 2;
@@ -50,60 +52,66 @@ function dogMove(dog, container) {
   const moveSpeed = 15;
   const jumpHeight = 100;
   let initialY = yPos;
+  let jumpProgress = 0;
+
+  const walkPositions = [
+    dogPosition.dogWalk,
+    dogPosition.dogWalkSecond,
+    dogPosition.dogWalkThird,
+    dogPosition.dogWalkFour,
+    dogPosition.dogWalkFive,
+  ];
+
+  const jumpPositions = [dogPosition.dogJump, dogPosition.dogJumpSecond];
+  const grassHeight = container.clientHeight * 0.35;
 
   setInterval(() => {
     if (dogStatus === 'walk') {
-      currentFrame = (currentFrame + 1) % totalFrames;
-      const positions = [
-        dogPosition.dogWalk,
-        dogPosition.dogWalkSecond,
-        dogPosition.dogWalkThird,
-        dogPosition.dogWalkFour,
-        dogPosition.dogWalkFive,
-      ];
-      const currentPosition = positions[currentFrame];
+      dog.style.zIndex = '10';
+      dog.style.opacity = '1';
+
+      currentWalkFrame = (currentWalkFrame + 1) % totalWalkFrames;
+      const currentPosition = walkPositions[currentWalkFrame];
       dog.style.backgroundPosition = `${currentPosition.PositionX}px ${currentPosition.PositionY}px`;
 
       if (xPos < targetX) {
         xPos += moveSpeed;
-        dog.style.setProperty('--x-pos', `${xPos}px`);
-        dog.style.setProperty('--y-pos', `${yPos}px`);
         dog.style.transform = `translate(${xPos}px, ${yPos}px) scale(3)`;
       } else {
-        dogStatus = 'jump up'; // Change status to jump up
-        currentFrame = 0;
+        dogStatus = 'jump';
+        currentJumpFrame = 0;
+        jumpProgress = 0;
       }
-    } else if (dogStatus === 'jump up') {
-      const jumpFrames = [dogPosition.dogJump, dogPosition.dogJumpSecond];
-      currentFrame = (currentFrame);
-      const currentPosition = jumpFrames[currentFrame];
+    } else if (dogStatus === 'jump') {
+      jumpProgress += 0.1;
+      const jumpCurve = 10 * jumpHeight * (jumpProgress * (1 - jumpProgress));
+      yPos = initialY - jumpCurve;
+      currentJumpFrame = Math.floor(jumpProgress * totalJumpFrames);
+      const currentPosition = jumpPositions[Math.min(currentJumpFrame, totalJumpFrames - 1)];
 
-      yPos = Math.max(initialY - jumpHeight, yPos - moveSpeed); // Move Y position upward
+      if (yPos > initialY - grassHeight) {
+        dog.style.zIndex = '1';
+        dog.style.opacity = '0';
+      } else {
+        dog.style.zIndex = '10';
+        dog.style.opacity = '1';
+      }
+
       dog.style.backgroundPosition = `${currentPosition.PositionX}px ${currentPosition.PositionY}px`;
-      dog.style.setProperty('--x-pos', `${xPos}px`);
-      dog.style.setProperty('--y-pos', `${yPos}px`);
-
-      if (yPos <= initialY - jumpHeight) {
-        dogStatus = 'jump down'; // Change status to jump down
-        currentFrame = 0;
-      }
-    } else if (dogStatus === 'jump down') {
-      const jumpFrames = [dogPosition.dogJumpSecond, dogPosition.dogJump];
-      currentFrame = (currentFrame);
-      const currentPosition = jumpFrames[currentFrame];
-
-      yPos = Math.min(initialY, yPos + moveSpeed); // Move Y position downward
-      dog.style.backgroundPosition = `${currentPosition.PositionX}px ${currentPosition.PositionY}px`;
-      dog.style.setProperty('--x-pos', `${xPos}px`);
-      dog.style.setProperty('--y-pos', `${yPos}px`);
-
-      if (yPos >= initialY) {
-        dogStatus = 'hide';
-      }
-    } else if (dogStatus === 'hide') {
-      dog.style.backgroundPosition = `${dogPosition.dogJumpSecond.PositionX}px ${dogPosition.dogJumpSecond.PositionY}px`;
       dog.style.transform = `translate(${xPos}px, ${yPos}px) scale(3)`;
-      dog.style.zIndex = '-1';
+
+      if (jumpProgress >= 1) {
+        dogStatus = 'landing';
+        yPos = initialY - grassHeight;
+        currentJumpFrame = 1;
+      }
+    } else if (dogStatus === 'landing') {
+      const currentPosition = jumpPositions[1];
+      dog.style.backgroundPosition = `${currentPosition.PositionX}px ${currentPosition.PositionY}px`;
+      dog.style.width = `${width}px`;
+      dog.style.height = `${height}px`;
+      dog.style.transform = `translate3d(1010px, 0px, -0px) scale(3.5)`;
+      dog.style.zIndex = 0;
     }
-  }, 150);
+  }, 100);
 }
