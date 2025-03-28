@@ -1,213 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
 * {
-	background-color: skyblue;
+    font-family: 'Pixelify Sans', monospace;
     margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    padding: 0;
+    box-sizing: border-box;
 }
 .sprite-duck {
-	background: url("assets/DuckHuntSprites.png") no-repeat;
-	width: 34px;
-	height: 31px;
-	position: absolute;
-	transform: scale(2); /* Makes the duck 2x bigger */
-	transform-origin: center center; /* Ensures scaling happens from the center */
-}
-
-.duck {
-	position: absolute;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+    background: url('assets/DuckHuntSprites.png') no-repeat;
+    width: 34px;
+    height: 31px;
+    position: absolute;
+    transform-origin: top left;
+    z-index: 99;
 }
 
 :root {
-  --duckHitOrMissIconsWidth: 25vw;
-  --scoreContainerWidth: 15vw;
-  --roundsContainerWidth: 10vw;
-  --gameAreaHeight: 35vw;
-  --border-radius: 16px;
-  --container-height: 80px;
-  --text-color: white;
-  --bg-color: black;
-  --font-size: 24px;
+    --duckHitOrMissIconsWidth: 25vw;
+    --scoreContainerWidth: 15vw;
+    --roundsContainerWidth: 10vw;
+    --gameAreaHeight: 35vw;
+    --border-radius: 16px;
+    --container-height: 80px;
+    --text-color: white;
+    --bg-color: black;
+    --font-size: 24px;
 }
 .gameContainer {
-  height: 100vh;
-  background-color: skyblue;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: skyblue;
 }
 .gameArea {
-  display: flex;
-  height: 80vh;
-  justify-content: space-around;
-  align-items: flex-end;
+    position: relative;
+    display: flex;
+    flex-grow: 2;
+    justify-content: space-around;
+    align-items: flex-end;
 }
 .treeContainer {
-  height: fit-content;
-  z-index: 0;
-  bottom: -8%;
+    height: fit-content;
+    z-index: 0;
+    position: relative;
+    bottom: -10%;
 }
 .treeContainer img {
-  width: 400px;
+    width: 400px;
 }
 .bushContainer {
-  position: relative;
-  width: 250px;
-  height: fit-content;
-  bottom: -10%;
-  z-index: 0;
+    position: relative;
+    width: 300px;
+    height: fit-content;
+    bottom: -20%;
 }
 .bushContainer img {
-  width: 100%;
+    width: 100%;
+}
+.treeContainer,
+.bushContainer {
+    z-index: 2;
 }
 .duckGetShot {
-  background: url('assets/DuckHuntSprites.png') no-repeat -131px -238px;
-  width: 31px;
-  height: 29px;
+    background: url('assets/DuckHuntSprites.png') no-repeat -131px -238px;
+    width: 31px;
+    height: 29px;
 }
 .duckFalling {
-  background: url('assets/DuckHuntSprites.png') no-repeat -178px -237px;
-  width: 18px;
-  height: 30px;
+    background: url('assets/DuckHuntSprites.png') no-repeat -178px -237px;
+    width: 18px;
+    height: 30px;
 }
 .infoGrassContainer {
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: flex-end;
-  height: 20vh;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 .grass {
-  position: absolute;
-  width: 100%;
+    width: 100%;
+    height: 70%;
+    z-index: 100;
 }
 .grass img {
-  width: 100%;
-  height: 300px;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    position: relative;
+}
+.infoContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    background-color: #887000;
+    height: 30%;
 }
 .shootsContainer,
 .roundsContainer,
 .ducksHitsOrMissCounterContainer,
 .scoreContainer {
-  z-index: 1;
-  margin-bottom: 8px;
-  border-radius: var(--border-radius);
+    z-index: 1;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    border: 3px solid lightgreen;
 }
-.shootsContainer {
-  position: relative;
-  width: 100px;
-  height: var(--container-height);
-}
-.shootsContainer > img {
-  width: 100%;
-  height: 100%;
-  border-radius: var(--border-radius);
-}
-.bulletsContainer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-.firstShootHide,
-.secondShootHide,
-.thirdShootHide {
-  position: absolute;
-  background-color: var(--bg-color);
-  width: 33.33%;
-  height: 55%;
-  border-radius: var(--border-radius);
-}
-
-.firstShootHide {
-  left: 0;
-  top: 0;
-}
-
-.secondShootHide {
-  left: 33.33%;
-  top: 0;
-}
-
-.thirdShootHide {
-  left: 66.66%;
-  top: 0;
-}
-
-/* Score container */
-.scoreContainer {
-  display: flex;
-  position: relative;
-  background-color: var(--bg-color);
-  justify-content: center;
-  align-items: center;
-  width: var(--scoreContainerWidth);
-  height: var(--container-height);
-}
-
-.scoreContainer > p {
-  color: var(--text-color);
-  margin-right: 5px;
-  font-size: var(--font-size);
-}
-
-.scoreCounter {
-  align-items: center;
-  color: var(--text-color);
-  font-size: var(--font-size);
+.shootsAndRoundsContainer {
+    width: 120px;
 }
 
 /* Rounds container */
 .roundsContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--bg-color);
-  width: var(--roundsContainerWidth);
-  height: var(--container-height);
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    justify-content: flex-start;
+    background-color: var(--bg-color);
+    width: 100%;
+    height: 40px;
 }
 
 .roundsContainer > span {
-  color: var(--text-color);
-  font-size: var(--font-size);
+    color: var(--text-color);
+    font-size: 32px;
+}
+.shootsContainer {
+    position: relative;
+    width: 100%;
+    height: var(--container-height);
+}
+
+.shootsContainer > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+.bulletsContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.firstShootHide,
+.secondShootHide,
+.thirdShootHide {
+    position: absolute;
+    background-color: var(--bg-color);
+    width: 33.33%;
+    height: 55%;
+    border-radius: 8px;
+}
+
+.firstShootHide {
+    left: 0;
+    top: 0;
+}
+
+.secondShootHide {
+    left: 33.33%;
+    top: 0;
+}
+
+.thirdShootHide {
+    left: 66.66%;
+    top: 0;
+}
+
+/* Score container */
+.scoreContainer {
+    display: flex;
+    padding-right: 8px;
+    font-size: 32px;
+    flex-direction: column;
+    position: relative;
+    background-color: var(--bg-color);
+    justify-content: center;
+    align-items: flex-end;
+    width: 160px;
+    height: var(--container-height);
+    color: white;
 }
 
 /* Ducks hit/miss counter */
 .ducksHitsOrMissCounterContainer {
-  display: flex;
-  align-items: center;
-  background-color: var(--bg-color);
-  width: fit-content;
-  height: var(--container-height);
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-color);
+    width: fit-content;
+    height: var(--container-height);
+    padding-left: 8px;
 }
-
+.hitsText {
+    color: lightgreen;
+    font-size: 32px;
+}
 .duckHitOrMissIcons {
-  display: flex;
-  flex-direction: row;
-  width: var(--duckHitOrMissIconsWidth);
-  padding: 0 4px;
-}
-
-.duckHitOrMiss1,
-.duckHitOrMiss2,
-.duckHitOrMiss3,
-.duckHitOrMiss4,
-.duckHitOrMiss5,
-.duckHitOrMiss6 {
-  width: 16.67%;
-  padding: 0;
-  margin: 0;
+    display: flex;
+    flex-direction: row;
+    width: var(--duckHitOrMissIconsWidth);
+    padding: 0 4px;
+    height: 100%;
 }
 
 .duckIcon {
-  margin-right: 4px;
+    padding: 12px 8px;
+    display: flex;
+    align-self: center;
 }
 
 .duckHitOrMissIcons > div > img {
-  width: 100%;
-  height: auto;
+    width: 100%;
 }
 
 .redDuck {
-  display: none;
+    display: none;
+}
+
+/* *CROSSHAIR */
+.crosshair {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.crosshair.aim {
+    background: url('assets/crosshair.png') no-repeat center center;
+    background-size: contain;
+}
+
+.crosshair.forbidden {
+    background: url('assets/forbbiden.png') no-repeat center center;
+    background-size: contain;
+}
+
+body.crosshair-active {
+    cursor: none;
 }

@@ -1,26 +1,32 @@
 export const InputHandler = () => {
-	let mouseX;
-	let mouseY;
+    let mouseX;
+    let mouseY;
 
-	function trackMouse() {
-		document.addEventListener("click", function (mousePosition) {
-			mouseX = mousePosition.clientX;
-			mouseY = mousePosition.clientY;
-			console.log(`Mouse X: ${mouseX}, Mouse Y: ${mouseY}`);
-		});
-	}
+    document.addEventListener('click', function (mousePosition) {
+        mouseX = mousePosition.clientX;
+        mouseY = mousePosition.clientY;
+        console.log(`Mouse X: ${mouseX}, Mouse Y: ${mouseY}`);
+    });
 
-	function getMouseXPosition() {
-		return mouseX;
-	}
+    function checkHit(duckX, duckY, duckWidth, duckHeight) {
+        return (
+            mouseX >= duckX &&
+            mouseX <= duckX + duckWidth &&
+            mouseY >= duckY &&
+            mouseY <= duckY + duckHeight
+        );
+    }
+    function getMouseXPosition() {
+        return mouseX;
+    }
 
-	function getMouseYPosition() {
-		return mouseY;
-	}
+    function getMouseYPosition() {
+        return mouseY;
+    }
 
-	return {
-		getMouseXPosition,
-		getMouseYPosition,
-		trackMouse,
-	};
+    return {
+        getMouseXPosition,
+        getMouseYPosition,
+        checkHit,
+    };
 };

@@ -28,3 +28,4 @@ config.local.js
 
 # If you end up using any package management
 /node_modules
+.idea/*
