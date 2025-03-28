@@ -7,10 +7,10 @@
     box-sizing: border-box;
 }
 .sprite-duck {
+    position: absolute;
     background: url('assets/DuckHuntSprites.png') no-repeat;
     width: 34px;
     height: 31px;
-    position: absolute;
     transform-origin: top left;
     z-index: 99;
 }
@@ -35,14 +35,13 @@
 .gameArea {
     position: relative;
     display: flex;
-    flex-grow: 2;
     justify-content: space-around;
     align-items: flex-end;
+    height: 70%;
 }
 .treeContainer {
-    height: fit-content;
-    z-index: 0;
     position: relative;
+    height: fit-content;
     bottom: -10%;
 }
 .treeContainer img {
@@ -57,10 +56,6 @@
 .bushContainer img {
     width: 100%;
 }
-.treeContainer,
-.bushContainer {
-    z-index: 2;
-}
 .duckGetShot {
     background: url('assets/DuckHuntSprites.png') no-repeat -131px -238px;
     width: 31px;
@@ -72,53 +67,52 @@
     height: 30px;
 }
 .infoGrassContainer {
-    flex-grow: 1;
     display: flex;
     flex-direction: column;
+    height: 30%;
 }
 .grass {
     width: 100%;
     height: 70%;
-    z-index: 100;
+    z-index: 2;
 }
 .grass img {
+    position: relative;
     width: 100%;
     height: 100%;
-    z-index: 2;
-    position: relative;
 }
 .infoContainer {
-    width: 100%;
     display: flex;
     justify-content: space-evenly;
     align-items: flex-end;
-    background-color: #887000;
+    width: 100%;
     height: 30%;
+    background-color: #887000;
 }
 .shootsContainer,
 .roundsContainer,
 .ducksHitsOrMissCounterContainer,
 .scoreContainer {
-    z-index: 1;
     margin-bottom: 8px;
     border-radius: 8px;
     border: 3px solid lightgreen;
 }
 .shootsAndRoundsContainer {
+    position: relative;
     width: 120px;
+    z-index: 3;
 }
 
 /* Rounds container */
 .roundsContainer {
     display: flex;
     align-items: center;
-    padding: 0 8px;
     justify-content: flex-start;
-    background-color: var(--bg-color);
     width: 100%;
+    padding: 0 8px;
     height: 40px;
+    background-color: var(--bg-color);
 }
-
 .roundsContainer > span {
     color: var(--text-color);
     font-size: 32px;
@@ -128,7 +122,6 @@
     width: 100%;
     height: var(--container-height);
 }
-
 .shootsContainer > img {
     width: 100%;
     height: 100%;
@@ -136,59 +129,59 @@
 }
 .bulletsContainer {
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
+    top: 0;
+    left: 0;
 }
 .firstShootHide,
 .secondShootHide,
 .thirdShootHide {
     position: absolute;
-    background-color: var(--bg-color);
     width: 33.33%;
     height: 55%;
     border-radius: 8px;
+    background-color: var(--bg-color);
 }
 
 .firstShootHide {
-    left: 0;
     top: 0;
+    left: 0;
 }
 
 .secondShootHide {
-    left: 33.33%;
     top: 0;
+    left: 33.33%;
 }
 
 .thirdShootHide {
-    left: 66.66%;
     top: 0;
+    left: 66.66%;
 }
 
 /* Score container */
 .scoreContainer {
-    display: flex;
-    padding-right: 8px;
-    font-size: 32px;
-    flex-direction: column;
     position: relative;
-    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: flex-end;
+    padding-right: 8px;
+    font-size: 32px;
     width: 160px;
     height: var(--container-height);
     color: white;
+    background-color: var(--bg-color);
 }
 
 /* Ducks hit/miss counter */
 .ducksHitsOrMissCounterContainer {
     display: flex;
     align-items: center;
-    background-color: var(--bg-color);
     width: fit-content;
     height: var(--container-height);
     padding-left: 8px;
+    background-color: var(--bg-color);
 }
 .hitsText {
     color: lightgreen;
@@ -198,20 +191,17 @@
     display: flex;
     flex-direction: row;
     width: var(--duckHitOrMissIconsWidth);
-    padding: 0 4px;
     height: 100%;
+    padding: 0 4px;
 }
-
 .duckIcon {
-    padding: 12px 8px;
     display: flex;
     align-self: center;
+    padding: 12px 2px;
 }
-
 .duckHitOrMissIcons > div > img {
     width: 100%;
 }
-
 .redDuck {
     display: none;
 }
@@ -224,17 +214,14 @@
     pointer-events: none;
     z-index: 9999;
 }
-
 .crosshair.aim {
     background: url('assets/crosshair.png') no-repeat center center;
     background-size: contain;
 }
-
 .crosshair.forbidden {
     background: url('assets/forbbiden.png') no-repeat center center;
     background-size: contain;
 }
-
 body.crosshair-active {
     cursor: none;
 }
