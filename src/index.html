@@ -97,3 +97,80 @@
   -->
     <!--
   -->
+
+  <div class="spacers"> </div>
+
+  <div class="gameContainer">
+    <div class="gameArea">
+      <div class="alingGameOverMenu">
+      <div class="gameOverMenu">
+        <p class="gameOverTitle">GAME <br> OVER</p>
+        <button class="restartButton">RESTART</button>
+      </div>
+    </div>
+      <!-- z index of images are 0 -->
+      <div class="treeContainer">
+        <img src="./assets/tree.png" alt="" />
+      </div>
+      <div class="bushContainer">
+        <img src="./assets/bush.png" alt="" />
+      </div>
+    </div>
+    <div class="infoGrassContainer">
+      <div class="grass"><img src="./assets/grass.png" alt="" /></div>
+      <div class="infoContainer">
+        <div class="shootsAndRoundsContainer">
+          <div class="roundsContainer">
+            <span>R = 1</span>
+            <span class="roundCounter"></span>
+          </div>
+          <div class="shootsContainer">
+            <img src="./assets/shoots.png" alt="" />
+            <div class="bulletsContainer">
+              <div class="firstShootHide"></div>
+              <div class="secondShootHide"></div>
+              <div class="thirdShootHide"></div>
+            </div>
+          </div>
+        </div>
+        <div class="ducksHitsOrMissCounterContainer">
+          <div class="hitsText">HITS</div>
+          <div class="duckHitOrMissIcons info">
+            <div class="duckHitOrMiss1 duckIcon">
+              <!-- duck image white is default and red is when hit  -->
+              <img class="whiteDuck" src="./assets/duckWhite.png" alt="" />
+              <img class="redDuck" src="./assets/duckRed.png" alt="" />
+            </div>
+            <div class="duckHitOrMiss2 duckIcon">
+              <img class="whiteDuck" src="./assets/duckWhite.png" alt="" />
+              <img class="redDuck" src="./assets/duckRed.png" alt="" />
+            </div>
+            <div class="duckHitOrMiss3 duckIcon">
+              <img class="whiteDuck" src="./assets/duckWhite.png" alt="" />
+              <img class="redDuck" src="./assets/duckRed.png" alt="" />
+            </div>
+            <div class="duckHitOrMiss4 duckIcon">
+              <img class="whiteDuck" src="./assets/duckWhite.png" alt="" />
+              <img class="redDuck" src="./assets/duckRed.png" alt="" />
+            </div>
+            <div class="duckHitOrMiss5 duckIcon">
+              <img class="whiteDuck" src="./assets/duckWhite.png" alt="" />
+              <img class="redDuck" src="./assets/duckRed.png" alt="" />
+            </div>
+            <div class="duckHitOrMiss6 duckIcon">
+              <img class="whiteDuck" src="./assets/duckWhite.png" alt="" />
+              <img class="redDuck" src="./assets/duckRed.png" alt="" />
+            </div>
+          </div>
+        </div>
+        <div class="scoreContainer">
+          <span class="scoreCounter">000000</span>
+          <span class="scoreText">Score</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<script type="module" src="./game/duck.js"></script>
+<script type="module" src="./ui/ui.js"></script>
+<script type="module" src="main.js"></script>
