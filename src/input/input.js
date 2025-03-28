@@ -8,14 +8,6 @@ export const InputHandler = () => {
         console.log(`Mouse X: ${mouseX}, Mouse Y: ${mouseY}`);
     });
 
-    function checkHit(duckX, duckY, duckWidth, duckHeight) {
-        return (
-            mouseX >= duckX &&
-            mouseX <= duckX + duckWidth &&
-            mouseY >= duckY &&
-            mouseY <= duckY + duckHeight
-        );
-    }
     function getMouseXPosition() {
         return mouseX;
     }
@@ -27,6 +19,5 @@ export const InputHandler = () => {
     return {
         getMouseXPosition,
         getMouseYPosition,
-        checkHit,
     };
 };
