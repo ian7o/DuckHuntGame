@@ -1,6 +1,7 @@
 # macOS system files
 .DS_Store
 .AppleDouble
+.idea/*
 .LSOverride
 Icon
 ._*

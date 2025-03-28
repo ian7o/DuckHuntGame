@@ -19,7 +19,7 @@
     transform: scale(3);
     transform-origin: center center;
     z-index: 10;
-    top: 49%;
+    top: 10%;
     position: absolute;
     display: flex;
     align-items: center;
@@ -85,6 +85,7 @@
 }
 .grass {
   width: 100%;
+  position: relative;
 }
 .grass img {
   width: 100%;
