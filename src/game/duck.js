@@ -20,17 +20,20 @@ export const duckPositions = {
 		PositionY: -237,
 	},
 };
+
 // Get the first game area element
 const gameArea = document.querySelector(".gameArea");
 
 // Only create and append duck if gameArea exists
 if (gameArea) {
 	const duck = document.createElement("div");
+	// Add the necessary classes for sprite display
 	duck.classList.add("duck");
 	duck.classList.add("sprite-duck");
 	duck.style.backgroundPosition = `${duckPositions.initialDuckPosition.PositionX}px ${duckPositions.initialDuckPosition.PositionY}px`;
 	gameArea.appendChild(duck);
 
+	// Start the duck movement
 	duckMove(duck);
 }
 
