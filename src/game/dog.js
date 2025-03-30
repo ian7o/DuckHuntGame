@@ -49,92 +49,99 @@ const dogPosition = {
 
 const dogArea = document.querySelector('.dogArea');
 
-const gameArea = document.querySelector('.dogArea');
+const grass = document.querySelector('.grass');
 
-if (dogArea) {
+if (grass) {
 	const dog = document.createElement('div');
 	dog.classList.add('sprite-dog');
-	dog.style.backgroundPosition = `${dogPosition.dogWalk.PositionX}px ${dogPosition.dogWalk.PositionY}px`;
-	gameArea.appendChild(dog);
+	//dog.style.backgroundPosition = `${dogPosition.dogWalk.PositionX}px ${dogPosition.dogWalk.PositionY}px`;
+	//grass.appendChild(dog);
 	//to play the animatino
-	//dogMove(dog, dogArea);
+	//dogMove(dog, grass);
+}
+if(dogArea){
+	const dog = document.createElement('div');
+	dog.classList.add('sprite-dog');
+	dogArea.appendChild(dog);
+	
 	//dogLaugh(dog, dogArea);
-	//dogWithDucks(dog, dogArea);
+	dogWithDucks(dog, dogArea);
 }
 
 
 function dogMove(dog, container) {
-	const totalFrames = 5;
-	let currentFrame = 0;
-	let dogStatus = 'walk'; // Initial status
-
-	//console.log(container.clientWidth / 2);
-
-	console.log(container.clientHeight)
-
-	let xPos = -200;
-	let yPos = 690;
-
-	const targetX = container.clientWidth / 2;
-	const moveSpeed = 15;
-	const jumpHeight = 100;
-	let initialY = yPos;
-
-	setInterval(() => {
-		if (dogStatus === 'walk') {
-			currentFrame = (currentFrame + 1) % totalFrames;
-			const positions = [
-				dogPosition.dogWalk,
-				dogPosition.dogWalkSecond,
-				dogPosition.dogWalkThird,
-				dogPosition.dogWalkFour,
-				dogPosition.dogWalkFive,
-			];
-			const currentPosition = positions[currentFrame];
-			dog.style.backgroundPosition = `${currentPosition.PositionX}px ${currentPosition.PositionY}px`;
-
-			if (xPos < targetX) {
-				xPos += moveSpeed;
-				dog.style.setProperty('--x-pos', `${xPos}px`);
-				dog.style.setProperty('--y-pos', `${yPos}px`);
-				dog.style.transform = `translate(${xPos}px, ${yPos}px) scale(3)`;
-			} else {
-				dogStatus = 'jump up'; // Change status to jump up
-				currentFrame = 0;
-			}
-		} else if (dogStatus === 'jump up') {
-			const jumpFrames = [dogPosition.dogJump, dogPosition.dogJumpSecond];
-			currentFrame = (currentFrame);
-			const currentPosition = jumpFrames[currentFrame];
-
-			yPos = Math.max(initialY - jumpHeight, yPos - moveSpeed); // Move Y position upward
-			dog.style.backgroundPosition = `${currentPosition.PositionX}px ${currentPosition.PositionY}px`;
-			dog.style.setProperty('--x-pos', `${xPos}px`);
-			dog.style.setProperty('--y-pos', `${yPos}px`);
-
-			if (yPos <= initialY - jumpHeight) {
-				dogStatus = 'jump down'; // Change status to jump down
-				currentFrame = 0;
-			}
-		} else if (dogStatus === 'jump down') {
-			const jumpFrames = [dogPosition.dogJumpSecond, dogPosition.dogJump];
-			currentFrame = (currentFrame);
-			const currentPosition = jumpFrames[currentFrame];
-
-			yPos = Math.min(initialY, yPos + moveSpeed); // Move Y position downward
-			dog.style.backgroundPosition = `${currentPosition.PositionX}px ${currentPosition.PositionY}px`;
-			dog.style.setProperty('--x-pos', `${xPos}px`);
-			dog.style.setProperty('--y-pos', `${yPos}px`);
-
-			if (yPos >= initialY) {
-				dogStatus = 'hide';
-			}
-		} else if (dogStatus === 'hide') {
-			dog.style.backgroundPosition = `${dogPosition.dogJumpSecond.PositionX}px ${dogPosition.dogJumpSecond.PositionY}px`;
-			dog.style.transform = `translate(${xPos}px, ${yPos}px) scale(3)`;
-			dog.style.zIndex = '-1';
-		}
-	}, 150);
+    const totalWalkFrames = 5;
+    const totalJumpFrames = 2;
+    let currentWalkFrame = 0;
+    let currentJumpFrame = 0;
+    let dogStatus = 'walk';
+  
+    let xPos = 0;
+    let yPos = container.clientHeight / 2;
+    const targetX = container.clientWidth / 2;
+    const moveSpeed = 15;
+    const jumpHeight = 100;
+    let initialY = yPos;
+    let jumpProgress = 0;
+  
+    const walkPositions = [
+      dogPosition.dogWalk,
+      dogPosition.dogWalkSecond,
+      dogPosition.dogWalkThird,
+      dogPosition.dogWalkFour,
+      dogPosition.dogWalkFive,
+    ];
+  
+    const jumpPositions = [dogPosition.dogJump, dogPosition.dogJumpSecond];
+    const grassHeight = container.clientHeight * 0.35;
+  
+    setInterval(() => {
+      if (dogStatus === 'walk') {
+        dog.style.zIndex = '10';
+        dog.style.opacity = '1';
+  
+        currentWalkFrame = (currentWalkFrame + 1) % totalWalkFrames;
+        const currentPosition = walkPositions[currentWalkFrame];
+        dog.style.backgroundPosition = `${currentPosition.PositionX}px ${currentPosition.PositionY}px`;
+  
+        if (xPos < targetX) {
+          xPos += moveSpeed;
+          dog.style.transform = `translate(${xPos}px, ${yPos}px) scale(3)`;
+        } else {
+          dogStatus = 'jump';
+          currentJumpFrame = 0;
+          jumpProgress = 0;
+        }
+      } else if (dogStatus === 'jump') {
+        jumpProgress += 0.1;
+        const jumpCurve = 10 * jumpHeight * (jumpProgress * (1 - jumpProgress));
+        yPos = initialY - jumpCurve;
+        currentJumpFrame = Math.floor(jumpProgress * totalJumpFrames);
+        const currentPosition = jumpPositions[Math.min(currentJumpFrame, totalJumpFrames - 1)];
+  
+        if (yPos > initialY - grassHeight) {
+          dog.style.zIndex = '1';
+          dog.style.opacity = '0';
+        } else {
+          dog.style.zIndex = '10';
+          dog.style.opacity = '1';
+        }
+  
+        dog.style.backgroundPosition = `${currentPosition.PositionX}px ${currentPosition.PositionY}px`;
+        dog.style.transform = `translate(${xPos}px, ${yPos}px) scale(3)`;
+  
+        if (jumpProgress >= 1) {
+          dogStatus = 'landing';
+          yPos = initialY - grassHeight;
+          currentJumpFrame = 1;
+        }
+      } else if (dogStatus === 'landing') {
+        const currentPosition = jumpPositions[1];
+        dog.style.backgroundPosition = `${currentPosition.PositionX}px ${currentPosition.PositionY}px`;
+        dog.style.transform = `translate3d(1010px, 0px, -0px) scale(3.5)`;
+        dog.style.zIndex = 0;
+      }
+    }, 100);
 }
 
 
