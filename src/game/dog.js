@@ -35,27 +35,46 @@ const dogPosition = {
 	dogLaughSecond: {
 		PositionX: -257,
 		PositionY: -63,
-	}
+	},
+
+	dogWithDuckFirst: {
+		PositionX: -332,
+		PositionY: -3,
+	},
+	dogWithDuckSecond: {
+		PositionX: -319,
+		PositionY: -63,
+	},
 };
+
+const dogArea = document.querySelector('.dogArea');
 
 const gameArea = document.querySelector('.dogArea');
 
-if (gameArea) {
+if (dogArea) {
 	const dog = document.createElement('div');
 	dog.classList.add('sprite-dog');
 	dog.style.backgroundPosition = `${dogPosition.dogWalk.PositionX}px ${dogPosition.dogWalk.PositionY}px`;
 	gameArea.appendChild(dog);
-	//dogMove(dog, gameArea);
-	dogLaugh(dog, gameArea)
+	//to play the animatino
+	//dogMove(dog, dogArea);
+	//dogLaugh(dog, dogArea);
+	//dogWithDucks(dog, dogArea);
 }
+
 
 function dogMove(dog, container) {
 	const totalFrames = 5;
 	let currentFrame = 0;
 	let dogStatus = 'walk'; // Initial status
 
-	let xPos = 0;
-	let yPos = container.clientHeight / 2;
+	//console.log(container.clientWidth / 2);
+
+	console.log(container.clientHeight)
+
+	let xPos = -200;
+	let yPos = 690;
+
 	const targetX = container.clientWidth / 2;
 	const moveSpeed = 15;
 	const jumpHeight = 100;
@@ -126,12 +145,8 @@ function dogLaugh(dog, container) {
 	let topAnimationLimit = 550;
 	let downAnimationLimit = 650;
 	let dogStatus = 'Laugh up';
-	console.log(container.clientWidth / 2)
 	let xPos = container.clientWidth / 2;
-	console.log(container.clientHeight)
-	let yPos = 650
-	//let yPos = 550
-
+	let yPos = 650;
 
 	setInterval(() => {
 		currentFrame = (currentFrame + 1) % totalFrames;
@@ -158,5 +173,53 @@ function dogLaugh(dog, container) {
 		dog.style.setProperty('--y-pos', `${yPos}px`);
 		dog.style.zIndex = "1";
 		dog.style.transform = `translate(${xPos}px, ${yPos}px) scale(3)`;
+	}, 150);
+}
+
+
+function dogWithDucks(dog, container) {
+	const totalFrames = 2;
+	let currentFrame = 0;
+	let moveSpeed = 10;
+	let topAnimationLimit = 530;
+	let downAnimationLimit = 650;
+	let dogStatus = 'Laugh up';
+	let xPos = container.clientWidth / 2;
+	let yPos = 650
+	let duckDeathQuantity = 2;
+
+
+	setInterval(() => {
+		currentFrame = (currentFrame + 1) % totalFrames;
+		const positions = [
+			dogPosition.dogWithDuckFirst,
+			dogPosition.dogWithDuckSecond,
+		];
+		let currentPosition;
+
+		if (duckDeathQuantity === 1) {
+			currentPosition = positions[0];
+		}
+		else if (duckDeathQuantity === 2) {
+			currentPosition = positions[1];
+		}
+		dog.style.backgroundPosition = `${currentPosition.PositionX}px ${currentPosition.PositionY}px`;
+
+		if (dogStatus === 'Laugh up') {
+			yPos += -moveSpeed
+			if (yPos == topAnimationLimit) {
+				dogStatus = 'Laugh down';
+			}
+		}
+		else if (dogStatus == 'Laugh down' && yPos <= downAnimationLimit) {
+			yPos += +moveSpeed
+		}
+
+
+		dog.style.setProperty('--x-pos', `${xPos}px`);
+		dog.style.setProperty('--y-pos', `${yPos}px`);
+		dog.style.zIndex = "1";
+		dog.style.transform = `translate(${xPos}px, ${yPos}px) scale(3)`;
+
 	}, 150);
 }
