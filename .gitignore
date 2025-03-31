@@ -1,6 +1,7 @@
 # macOS system files
 .DS_Store
 .AppleDouble
+.idea/*
 .LSOverride
 Icon
 ._*
@@ -9,6 +10,7 @@ Icon
 
 # VSCode specific files
 .vscode/*
+.vscode/settings.json
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
@@ -28,3 +30,4 @@ config.local.js
 
 # If you end up using any package management
 /node_modules
+.idea/*
