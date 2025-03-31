@@ -20,12 +20,12 @@ export const Game = () => {
     let currentNumberOfHitForDog = 0;
 
     const sounds = {
-        shot: new Audio('./assets/sounds/shot.mp3'),
-        duckFall: new Audio('./assets/sounds/duckFalling.mp3'),
-        dogLaugh: new Audio('./assets/sounds/dogLaugh.mp3'),
-        gameOver: new Audio('./assets/sounds/lose.mp3'),
-        nextRound: new Audio('./assets/sounds/nextRound.mp3'),
-        startGame: new Audio('assets/sounds/startGame.mp3'),
+        shot: new Audio('./src/assets/sounds/shot.mp3'),
+        duckFall: new Audio('./src/assets/sounds/duckFalling.mp3'),
+        dogLaugh: new Audio('./src/assets/sounds/dogLaugh.mp3'),
+        gameOver: new Audio('./src/assets/sounds/lose.mp3'),
+        nextRound: new Audio('./src/assets/sounds/nextRound.mp3'),
+        startGame: new Audio('./src/assets/sounds/startGame.mp3'),
     };
 
     const dog = Dog();

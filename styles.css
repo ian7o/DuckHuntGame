@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
 /** GLOBAL STYLES */
 * {
     font-family: 'Pixelify Sans', monospace;
@@ -7,7 +8,7 @@
     box-sizing: border-box;
 }
 .sprite-duck {
-    background: url('assets/DuckHuntSprites.png') no-repeat;
+    background: url('./src/assets/DuckHuntSprites.png') no-repeat;
     width: 34px;
     height: 31px;
     position: absolute;
@@ -16,7 +17,7 @@
     z-index: 1;
 }
 .sprite-dog {
-    background: url('assets/DuckHuntSprites.png') no-repeat;
+    background: url('./src/assets/DuckHuntSprites.png') no-repeat;
     width: 58px;
     height: 43px;
     transform-origin: center center;
@@ -213,19 +214,19 @@
 /** DUCK SPRITES & ANIMATIONS */
 .sprite-duck {
     position: absolute;
-    background: url('assets/DuckHuntSprites.png') no-repeat;
+    background: url('./src/assets/DuckHuntSprites.png') no-repeat;
     width: 34px;
     height: 31px;
     transform-origin: top left;
     z-index: 99;
 }
 .duckGetShot {
-    background: url('assets/DuckHuntSprites.png') no-repeat -131px -238px;
+    background: url('./src/assets/DuckHuntSprites.png') no-repeat -131px -238px;
     width: 31px;
     height: 29px;
 }
 .duckFalling {
-    background: url('assets/DuckHuntSprites.png') no-repeat -178px -237px;
+    background: url('./src/assets/DuckHuntSprites.png') no-repeat -178px -237px;
     width: 18px;
     height: 30px;
 }
@@ -243,11 +244,11 @@
     z-index: 9999;
 }
 .crosshair.aim {
-    background: url('assets/crosshair.png') no-repeat center center;
+    background: url('./src/assets/crosshair.png') no-repeat center center;
     background-size: contain;
 }
 .crosshair.forbidden {
-    background: url('assets/forbbiden.png') no-repeat center center;
+    background: url('./src/assets/forbbiden.png') no-repeat center center;
     background-size: contain;
 }
 body.crosshair-active {

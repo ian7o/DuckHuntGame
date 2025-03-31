@@ -134,7 +134,7 @@ export const Dog = () => {
         
         const totalFrames = 2;
         let currentFrame = 0;
-        let moveSpeed = 10;
+        let moveSpeed = 15;
         let topAnimationLimit = dogAreaHeightTopLimit;
         let downAnimationLimit = dogAreaHeightDownLimit;
         let dogStatus = 'Laugh up';
