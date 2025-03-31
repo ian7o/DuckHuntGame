@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
 
 /** GLOBAL STYLES */
 * {
@@ -13,14 +12,13 @@
   width: 34px;
   height: 31px;
   position: absolute;
-  transform: scale(2); /* Makes the duck 2x bigger */
-  transform-origin: center center; /* Ensures scaling happens from the center */
+  transform: scale(2);
+  transform-origin: center center;
 }
 .sprite-dog {
 	background: url('assets/DuckHuntSprites.png') no-repeat;
-	width: 53px;
-	height: 40px;
-    transform: scale(3);
+	width: 58px;
+	height: 43px;
     transform-origin: center center;
     z-index: 10;
     top: 10%;
@@ -56,7 +54,7 @@
     display: flex;
     justify-content: space-around;
     align-items: flex-end;
-    height: 70%;
+    height: 65%;
 }
 .dogArea{
   position: absolute;
@@ -88,17 +86,17 @@
 .infoGrassContainer {
     display: flex;
     flex-direction: column;
-    height: 30%;
+    height: 35%;
 }
 
 .grass {
+    position: relative;
     width: 100%;
     height: 70%;
     z-index: 2;
 }
 
 .grass img {
-    position: relative;
     width: 100%;
     height: 100%;
 }
@@ -292,14 +290,7 @@ body.crosshair-active {
     cursor: none;
 }
 
-/*
-*/
-.spacers {
-  height: 400px;
-}
-.gameMenuSeparator {
-  height: 400px;
-}
+
 .mainMenu {
   display: flex;
   flex-direction: column;
@@ -323,7 +314,7 @@ body.crosshair-active {
   align-self: flex-end;
 }
 
-.playbutton {
+.playButton {
   color: white;
   font-weight: bold;
   background-color: #cfcfcf;
@@ -357,7 +348,7 @@ body.crosshair-active {
   align-items: center;
 }
 .gameOverMenu {
-  display: flex;
+  display: none;
   flex-wrap: nowrap;
   flex-direction: column;
   position: absolute;

@@ -2,7 +2,7 @@ import { Duck } from './duck.js';
 import { InputHandler } from '../input/input.js';
 import { Dog } from './dog.js';
 
-export const game = () => {
+export const Game = () => {
     let score = 0;
     let currentWave = 0;
     let currentRound = 1;
@@ -21,7 +21,49 @@ export const game = () => {
 
     const dog = Dog();
     const gameArea = document.querySelector('.gameArea');
+    const mainMenu = document.querySelector('.mainMenu');
+    const gameOverMenu = document.querySelector('.gameOverMenu');
     const inputHandler = InputHandler();
+
+    //*GAME INIT
+    const startGame = () => {
+        mainMenu.remove();
+
+        dog.move();
+        setTimeout(() => {
+            wave();
+        }, 11000);
+    };
+
+   const restartGame = () => {
+       gameOverMenu.style.display = 'none'; 
+
+       score = 0;
+       currentWave = 0;
+       currentRound = 1;
+       shotsRemaining = 3;
+       ducksShotThisRound = 0;
+       ducksRequiredToAdvance = 6;
+       missedShots = 0;
+       maxMissedShots = 2;
+       escapedDucks = 0;
+       activeDucks = [];
+       waveInProgress = false;
+       canShoot = false;
+       currentHittedDucks = 0;
+       isStartingNewWave = false;
+       currentNumberOfHitForDog = 0;
+
+       const scoreCounter = document.querySelector('.scoreCounter');
+       scoreCounter.textContent = '0'.padStart(6, '0');
+       updateRoundCounter();
+       resetDucksKilledDisplay();
+       resetShootsDisplay();
+
+       setTimeout(() => {
+           wave();
+       }, 250);
+   };
 
     //* GAME FLOW CONTROL*
 
@@ -125,7 +167,7 @@ export const game = () => {
     };
 
     const gameOver = () => {
-        // TODO: Implement game over logic
+        gameOverMenu.style.display = 'flex';
     };
 
     //* PLAYER INPUT HANDLING*
@@ -305,5 +347,7 @@ export const game = () => {
         wave,
         processShot,
         getScore: () => score,
+        startGame,
+        restartGame,
     };
 };

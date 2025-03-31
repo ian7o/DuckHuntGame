@@ -52,7 +52,14 @@ export const Dog = () => {
         const grass = document.querySelector('.grass');
         const dog = document.createElement('div');
         dog.classList.add('sprite-dog');
+        dog.style.opacity = '0';
+        dog.style.left = '-50px';
+
         grass.appendChild(dog);
+
+        setTimeout(() => {
+            dog.style.opacity = '1';
+        }, 100);
 
         const totalWalkFrames = 5;
         const totalJumpFrames = 2;
