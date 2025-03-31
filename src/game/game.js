@@ -180,7 +180,7 @@ export const Game = () => {
     const gameOver = () => {
         sounds.gameOver.play();
         gameOverMenu.style.display = 'flex';
-        gameOverMenu.querySelector('.finalScore').textContent = score;
+        gameOverMenu.querySelector('.finalScore').textContent = `Score : ${score}`;
     };
 
     //* PLAYER INPUT HANDLING*
