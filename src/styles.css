@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
-
 /** GLOBAL STYLES */
 * {
     font-family: 'Pixelify Sans', monospace;
@@ -21,14 +20,13 @@
     width: 58px;
     height: 43px;
     transform-origin: center center;
+    top: 1%;
     z-index: 10;
-    top: 10%;
     position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 :root {
     --duckHitOrMissIconsWidth: 25vw;
     --scoreContainerWidth: 15vw;
@@ -40,7 +38,6 @@
     --bg-color: black;
     --font-size: 24px;
 }
-
 /** MAIN GAME CONTAINER */
 .gameContainer {
     height: 100vh;
@@ -48,7 +45,6 @@
     flex-direction: column;
     background-color: skyblue;
 }
-
 /** GAME AREA SECTION */
 .gameArea {
     position: relative;
@@ -67,41 +63,34 @@
     height: fit-content;
     bottom: -10%;
 }
-
 .treeContainer img {
     width: 400px;
 }
-
 .bushContainer {
     position: relative;
     width: 300px;
     height: fit-content;
     bottom: -20%;
 }
-
 .bushContainer img {
     width: 100%;
 }
-
 /** INFO AND GRASS CONTAINER */
 .infoGrassContainer {
     display: flex;
     flex-direction: column;
     height: 35%;
 }
-
 .grass {
     position: relative;
     width: 100%;
     height: 70%;
     z-index: 2;
 }
-
 .grass img {
     width: 100%;
     height: 100%;
 }
-
 .infoContainer {
     display: flex;
     justify-content: space-evenly;
@@ -110,7 +99,6 @@
     height: 30%;
     background-color: #887000;
 }
-
 /** COMMON UI CONTAINER STYLES */
 .shootsContainer,
 .roundsContainer,
@@ -120,14 +108,12 @@
     border-radius: 8px;
     border: 3px solid lightgreen;
 }
-
 /** SHOOTS AND ROUNDS SECTION */
 .shootsAndRoundsContainer {
     position: relative;
     width: 120px;
     z-index: 3;
 }
-
 .roundsContainer {
     display: flex;
     align-items: center;
@@ -137,24 +123,20 @@
     height: 40px;
     background-color: var(--bg-color);
 }
-
 .roundsContainer > span {
     color: var(--text-color);
     font-size: 32px;
 }
-
 .shootsContainer {
     position: relative;
     width: 100%;
     height: var(--container-height);
 }
-
 .shootsContainer > img {
     width: 100%;
     height: 100%;
     border-radius: 8px;
 }
-
 .bulletsContainer {
     position: absolute;
     width: 100%;
@@ -162,7 +144,6 @@
     top: 0;
     left: 0;
 }
-
 .firstShootHide,
 .secondShootHide,
 .thirdShootHide {
@@ -172,22 +153,18 @@
     border-radius: 8px;
     background-color: var(--bg-color);
 }
-
 .firstShootHide {
     top: 0;
     left: 0;
 }
-
 .secondShootHide {
     top: 0;
     left: 33.33%;
 }
-
 .thirdShootHide {
     top: 0;
     left: 66.66%;
 }
-
 /** DUCK HITS COUNTER SECTION */
 .ducksHitsOrMissCounterContainer {
     display: flex;
@@ -197,12 +174,10 @@
     padding-left: 8px;
     background-color: var(--bg-color);
 }
-
 .hitsText {
     color: lightgreen;
     font-size: 32px;
 }
-
 .duckHitOrMissIcons {
     display: flex;
     flex-direction: row;
@@ -210,21 +185,17 @@
     height: 100%;
     padding: 0 4px;
 }
-
 .duckIcon {
     display: flex;
     align-self: center;
     padding: 12px 2px;
 }
-
 .duckHitOrMissIcons > div > img {
     width: 100%;
 }
-
 .redDuck {
     display: none;
 }
-
 /** SCORE SECTION */
 .scoreContainer {
     position: relative;
@@ -239,7 +210,6 @@
     color: white;
     background-color: var(--bg-color);
 }
-
 /** DUCK SPRITES & ANIMATIONS */
 .sprite-duck {
     position: absolute;
@@ -249,25 +219,21 @@
     transform-origin: top left;
     z-index: 99;
 }
-
 .duckGetShot {
     background: url('assets/DuckHuntSprites.png') no-repeat -131px -238px;
     width: 31px;
     height: 29px;
 }
-
 .duckFalling {
     background: url('assets/DuckHuntSprites.png') no-repeat -178px -237px;
     width: 18px;
     height: 30px;
 }
-
 .duckEscape {
     transition: transform 1s, opacity 1s;
     transform: translateY(-200px);
     opacity: 0;
 }
-
 /** CROSSHAIR STYLES */
 .crosshair {
     position: absolute;
@@ -276,21 +242,17 @@
     pointer-events: none;
     z-index: 9999;
 }
-
 .crosshair.aim {
     background: url('assets/crosshair.png') no-repeat center center;
     background-size: contain;
 }
-
 .crosshair.forbidden {
     background: url('assets/forbbiden.png') no-repeat center center;
     background-size: contain;
 }
-
 body.crosshair-active {
     cursor: none;
 }
-
 .mainMenu {
     display: flex;
     flex-direction: column;
@@ -313,7 +275,6 @@ body.crosshair-active {
     z-index: 1;
     align-self: flex-end;
 }
-
 .playButton {
     color: white;
     font-weight: bold;
@@ -330,15 +291,12 @@ body.crosshair-active {
     -webkit-text-stroke-width: 3px;
     -webkit-text-stroke-color: darkslategrey;
 }
-
 .playbutton:hover {
     background-color: #66f001;
 }
-
 .inMenu {
     visibility: hidden;
 }
-
 .alingGameOverMenu {
     display: flex;
     position: absolute;
@@ -348,41 +306,27 @@ body.crosshair-active {
     align-items: center;
 }
 .gameOverMenu {
-    display: flex;
-    width: 400px;
     display: none;
     flex-wrap: nowrap;
     flex-direction: column;
     position: absolute;
     align-items: center;
     justify-content: center;
+    padding: 200px 9px 235px;
     border-radius: 25px;
     gap: 20px;
     background-color: rgba(0, 0, 0, 0.653);
+    height: 200px;
     z-index: 1;
 }
 .gameOverTitle {
     color: red;
     font-size: 140px;
     text-shadow: 2px 4px 4px rgb(127, 5, 5);
-    margin: 0px 20px 0px 20px;
-}
-.gameTitle {
-    color: red;
-    font-size: 140px;
-    text-shadow: 2px 4px 4px rgb(127, 5, 5);
-    margin: 0px 20px 0px 20px;
-}
-.overTitle {
-    color: red;
-    font-size: 100px;
-    text-shadow: 2px 4px 4px rgb(127, 5, 5);
-    margin: 0px 20px 0px 20px;
 }
 .finalScore {
     font-size: 64px;
     color: lightyellow;
-    margin: 0px 20px 0px 20px;
 }
 .restartButton {
     color: white;
@@ -390,8 +334,7 @@ body.crosshair-active {
     background-color: #cfcfcf;
     text-align: center;
     border-radius: 16px;
-    padding: 0 10px;
-    margin: 0px 0px 20px 0px;
+    padding: 0 1%;
     text-shadow: 8px 2px 4px darkslategrey;
     box-shadow: 8px 4px 4px darkslategrey;
     font-size: 60px;
