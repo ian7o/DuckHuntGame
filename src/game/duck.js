@@ -257,13 +257,14 @@ export const Duck = () => {
         return false;
     };
 
-    const move = (element, movement, initialPosition) => {
+    const move = (element, movement, initialPosition,extraSpeed) => {
         duckElement = element;
 
         let currentMovement = movement;
         let currentFrame = 0;
         const totalFrames = 3;
         let collisionCounter = 0;
+        let fasterSprite = 0
 
         const gameArea = duckElement.parentElement;
         const bounds = {
@@ -286,8 +287,9 @@ export const Duck = () => {
             currentFrame = (currentFrame + 1) % totalFrames;
             updateSprite(duckElement, currentMovement.sprites, currentFrame);
 
-            xPos += currentMovement.moveX;
-            yPos += currentMovement.moveY;
+            xPos += (currentMovement.moveX * extraSpeed) * 0.7;
+            yPos += (currentMovement.moveY * extraSpeed) * 0.7;
+            fasterSprite += 15;
 
             if (framesCounter <= 0) {
                 const collision = checkCollisions(xPos, yPos, bounds);
@@ -308,7 +310,7 @@ export const Duck = () => {
             duckElement.style.top = `${yPos}px`;
 
             duckElement.style.transform = `scale(3) ${currentMovement.rotation}`;
-        }, 150);
+        }, 150 - fasterSprite );
     };
 
     return {

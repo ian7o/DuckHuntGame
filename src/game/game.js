@@ -108,7 +108,7 @@ export const Game = () => {
 
             activeDucks.push(duckInfo);
 
-            duck.move(spawnData.duckElement, spawnData.movement, spawnData.initialPosition);
+            duck.move(spawnData.duckElement, spawnData.movement, spawnData.initialPosition, currentRound);
         }
     };
 
@@ -329,16 +329,18 @@ export const Game = () => {
     };
 
     const resetShootsDisplay = () => {
+        const bulletsContainer = document.querySelector('.bulletsContainer');
+
+        if (bulletsContainer) {
+            bulletsContainer.innerHTML = '';
+        }
+
         const divsThatHideBullets = document.querySelectorAll('.hideBullet');
         divsThatHideBullets.forEach(div => {
             div.remove();
         });
 
-        //sometimes arent properly remvoed from dom
-        const bulletsContainer = document.querySelector('.bulletsContainer');
-        if (bulletsContainer) {
-            bulletsContainer.innerHTML = ''; // Remove all child elements
-        }
+        shotsRemaining = 3;
     };
 
     const hideBullets = shotNumber => {
