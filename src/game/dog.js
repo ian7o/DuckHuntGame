@@ -70,7 +70,7 @@ export const Dog = () => {
         let xPos = 0;
         let yPos = grass.clientHeight / 2;
         const targetX = grass.clientWidth / 2;
-        const moveSpeed = 5;
+        const moveSpeed = 10;
         const jumpHeight = 100;
         let initialY = yPos;
         let jumpProgress = 0;
@@ -140,7 +140,6 @@ export const Dog = () => {
         const dogArea = document.querySelector('.dogArea');
         const dog = document.createElement('div');
         dog.classList.add('sprite-dog');
-        dogArea.appendChild(dog);
 
         const totalFrames = 2;
         let currentFrame = 0;
@@ -172,6 +171,7 @@ export const Dog = () => {
             dog.style.setProperty('--y-pos', `${yPos}px`);
             dog.style.zIndex = '1';
             dog.style.transform = `translate(${xPos}px, ${yPos}px) scale(3)`;
+            dogArea.appendChild(dog);
 
             setTimeout(() => {
                 dog.remove();
@@ -185,7 +185,6 @@ export const Dog = () => {
 
         const dog = document.createElement('div');
         dog.classList.add('sprite-dog');
-        dogArea.appendChild(dog);
 
         const totalFrames = 2;
         let currentFrame = 0;
@@ -221,6 +220,8 @@ export const Dog = () => {
             dog.style.setProperty('--y-pos', `${yPos}px`);
             dog.style.zIndex = '1';
             dog.style.transform = `translate(${xPos}px, ${yPos}px) scale(3)`;
+            dogArea.appendChild(dog);
+
             setTimeout(() => {
                 dog.remove();
                 clearInterval(intervalId);

@@ -19,6 +19,15 @@ export const Game = () => {
     let isStartingNewWave = false;
     let currentNumberOfHitForDog = 0;
 
+    const sounds = {
+        shot: new Audio('./assets/sounds/shot.mp3'),
+        duckFall: new Audio('./assets/sounds/duckFalling.mp3'),
+        dogLaugh: new Audio('./assets/sounds/dogLaugh.mp3'),
+        gameOver: new Audio('./assets/sounds/lose.mp3'),
+        nextRound: new Audio('./assets/sounds/nextRound.mp3'),
+        startGame: new Audio('assets/sounds/startGame.mp3')
+    };
+
     const dog = Dog();
     const gameArea = document.querySelector('.gameArea');
     const mainMenu = document.querySelector('.mainMenu');
@@ -28,42 +37,42 @@ export const Game = () => {
     //*GAME INIT
     const startGame = () => {
         mainMenu.remove();
-
+        sounds.startGame.play()
         dog.move();
         setTimeout(() => {
             wave();
         }, 11000);
     };
 
-   const restartGame = () => {
-       gameOverMenu.style.display = 'none'; 
+    const restartGame = () => {
+        gameOverMenu.style.display = 'none';
 
-       score = 0;
-       currentWave = 0;
-       currentRound = 1;
-       shotsRemaining = 3;
-       ducksShotThisRound = 0;
-       ducksRequiredToAdvance = 6;
-       missedShots = 0;
-       maxMissedShots = 2;
-       escapedDucks = 0;
-       activeDucks = [];
-       waveInProgress = false;
-       canShoot = false;
-       currentHittedDucks = 0;
-       isStartingNewWave = false;
-       currentNumberOfHitForDog = 0;
+        score = 0;
+        currentWave = 0;
+        currentRound = 1;
+        shotsRemaining = 3;
+        ducksShotThisRound = 0;
+        ducksRequiredToAdvance = 6;
+        missedShots = 0;
+        maxMissedShots = 2;
+        escapedDucks = 0;
+        activeDucks = [];
+        waveInProgress = false;
+        canShoot = false;
+        currentHittedDucks = 0;
+        isStartingNewWave = false;
+        currentNumberOfHitForDog = 0;
 
-       const scoreCounter = document.querySelector('.scoreCounter');
-       scoreCounter.textContent = '0'.padStart(6, '0');
-       updateRoundCounter();
-       resetDucksKilledDisplay();
-       resetShootsDisplay();
+        const scoreCounter = document.querySelector('.scoreCounter');
+        scoreCounter.textContent = '0'.padStart(6, '0');
+        updateRoundCounter();
+        resetDucksKilledDisplay();
+        resetShootsDisplay();
 
-       setTimeout(() => {
-           wave();
-       }, 250);
-   };
+        setTimeout(() => {
+            wave();
+        }, 250);
+    };
 
     //* GAME FLOW CONTROL*
 
@@ -140,6 +149,8 @@ export const Game = () => {
         if (isStartingNewWave) return;
         isStartingNewWave = true;
 
+        sounds.nextRound.play();
+
         currentWave = 0;
         currentRound++;
         ducksShotThisRound = 0;
@@ -167,7 +178,9 @@ export const Game = () => {
     };
 
     const gameOver = () => {
+        sounds.gameOver.play()
         gameOverMenu.style.display = 'flex';
+        gameOverMenu.querySelector('.finalScore').textContent = score;
     };
 
     //* PLAYER INPUT HANDLING*
@@ -187,6 +200,8 @@ export const Game = () => {
                 currentNumberOfHitForDog++;
                 duckInfo.killed = true;
                 hittedADuck = true;
+                sounds.shot.play()
+                sounds.duckFall.play()
 
                 dog.withDucks(currentNumberOfHitForDog);
                 if (currentNumberOfHitForDog === 2) {
@@ -200,6 +215,7 @@ export const Game = () => {
         if (!hittedADuck) {
             missedShots++;
             dog.laugh();
+            sounds.dogLaugh.play()
         }
         checkForEscapedDucks();
 
