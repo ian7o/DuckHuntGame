@@ -8,7 +8,7 @@ Is just a simple game that emule the duckHunt game originally launched for nes
 > [!TIP]
 > Folow the rules of the game for better experience:
 
->   Objective of the Game: The player must use a light gun (or controller) to shoot ducks that appear on the screen.
+>   Objective of the Game: The player must use the mouse with a custum crosshair to shoot ducks that appear on the screen.
 
 >  Single Player: The player tries to hit as many ducks as possible within a limited time.
 
