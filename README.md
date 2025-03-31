@@ -8,7 +8,7 @@ Is just a simple game that emule the duckHunt game originally launched for nes
 > [!TIP]
 > Folow the rules of the game for better experience:
 
->   Objective of the Game: The player must use the mouse with a custum crosshair to shoot ducks that appear on the screen.
+>   Objective of the Game: The player must use the mouse with a custom crosshair to shoot ducks that appear on the screen.
 
 >  Single Player: The player tries to hit as many ducks as possible within a limited time.
 
@@ -16,9 +16,9 @@ Is just a simple game that emule the duckHunt game originally launched for nes
 
 >  Scoring: Each duck shot down is worth points
 
->   Misses: If the player misses a duck, the dog appears and laughs.
+>   Misses: If the player misses a duck, the dog appears and laughs and miss a bullet.
 
-> Difficulty Levels: The game features different difficulty levels, increasing the speed.
+>  Difficulty Levels: The game features different difficulty levels, increasing the speed.
 
 >   End of the Game: The game continues until the player decides to stop or until reach a specific number of missing ducks.
 
