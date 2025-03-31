@@ -42,7 +42,10 @@ const duckDiagonalSprites = {
 };
 
 export const Duck = () => {
-    const inputHandler = InputHandler();
+    // Use let instead of const for isAlive, since it will change
+    let isAlive = true;
+    let duckElement = null;
+    let animationId = null;
 
     const sprites = {
         linear: duckLinearSprites,
@@ -119,29 +122,26 @@ export const Duck = () => {
     const create = gameArea => {
         if (!gameArea) return null;
 
-        const duckElement = document.createElement('div');
-        duckElement.classList.add('sprite-duck');
+        const element = document.createElement('div');
+        element.classList.add('sprite-duck');
 
-        duckElement.style.backgroundPosition = `${duckLinearSprites.initialDuckPosition.PositionX}px ${duckLinearSprites.initialDuckPosition.PositionY}px`;
-        duckElement.style.transformOrigin = 'top left';
+        element.style.backgroundPosition = `${duckLinearSprites.initialDuckPosition.PositionX}px ${duckLinearSprites.initialDuckPosition.PositionY}px`;
+        element.style.transformOrigin = 'top left';
 
-        gameArea.appendChild(duckElement);
+        gameArea.appendChild(element);
 
-        return duckElement;
+        return element;
     };
 
     const spawn = gameArea => {
-        const duckElement = create(gameArea);
+        duckElement = create(gameArea);
 
         const gameAreaWidth = gameArea.getBoundingClientRect().width;
         const gameAreaHeight = gameArea.getBoundingClientRect().height;
 
-        // Calculate initial position
         let xInitialPos = Math.floor(Math.random() * (gameAreaWidth * 0.8));
         let yInitialPos = gameAreaHeight;
-        console.log(yInitialPos);
 
-        // Set position using left/top
         duckElement.style.left = `${xInitialPos}px`;
         duckElement.style.top = `${yInitialPos}px`;
         duckElement.style.transform = `scale(3)`;
@@ -186,7 +186,7 @@ export const Duck = () => {
         }
     };
 
-    const updateSprite = (duckElement, sprites, currentFrame) => {
+    const updateSprite = (element, sprites, currentFrame) => {
         const positions = [
             sprites.initialDuckPosition,
             sprites.secondDuckPosition,
@@ -194,55 +194,72 @@ export const Duck = () => {
         ];
 
         const currentPosition = positions[currentFrame];
-        duckElement.style.backgroundPosition = `${currentPosition.PositionX}px ${currentPosition.PositionY}px`;
+        element.style.backgroundPosition = `${currentPosition.PositionX}px ${currentPosition.PositionY}px`;
     };
 
-    const handleDuckEscape = duckElement => {
-        duckElement.remove();
-    };
-
-    //add shot feature so i need to get input from inputhandler
-    //compare when click happens with where duck currently is
-    const isDied = (duckX, duckY, duckElement, gameAreaHeight) => {
-        const duckWidth = duckElement.getBoundingClientRect().width;
-        const duckHeight = duckElement.getBoundingClientRect().height;
-
-        if (inputHandler.checkHit(duckX, duckY, duckWidth, duckHeight)) {
-            console.log('DUCK HIT');
-
-            //change duck to died
-            duckElement.style.backgroundPosition = `${duckDies.duckDead.PositionX}px ${duckDies.duckDead.PositionY}px`;
-
-            //then to falling and make it fall from current position to y = gameareaheight
-            setTimeout(() => {
-                duckElement.style.backgroundPosition = `${duckDies.duckFall.PositionX}px ${duckDies.duckFall.PositionY}px`;
-
-                let rotation = 0;
-                const fallInterval = setInterval(() => {
-                    rotation += 45; // 45 degress increased each frame
-
-                    const currentY = parseInt(duckElement.style.top);
-                    const newY = currentY + 15;
-
-                    duckElement.style.transform = `scale(3) rotateY(${rotation}deg)`;
-                    duckElement.style.top = `${newY}px`;
-
-                    if (newY >= gameAreaHeight) {
-                        clearInterval(fallInterval);
-                        setTimeout(() => {
-                            duckElement.remove();
-                        }, 200);
-                    }
-                }, 50);
-            }, 250);
-
-            return true;
-        } else {
-            return false;
+    const handleDuckEscape = () => {
+        if (duckElement && duckElement.parentElement) {
+            duckElement.remove();
         }
     };
 
-    const move = (duckElement, movement, initialPosition) => {
+    const kill = () => {
+        if (!isAlive) return;
+
+        isAlive = false;
+
+        if (animationId) {
+            clearInterval(animationId);
+        }
+
+        const gameAreaHeight = duckElement.parentElement.getBoundingClientRect().height;
+
+        duckElement.style.backgroundPosition = `${duckDies.duckDead.PositionX}px ${duckDies.duckDead.PositionY}px`;
+
+        setTimeout(() => {
+            duckElement.style.backgroundPosition = `${duckDies.duckFall.PositionX}px ${duckDies.duckFall.PositionY}px`;
+
+            let rotation = 0;
+            const fallInterval = setInterval(() => {
+                rotation += 45; // 45 degrees increased each frame
+
+                const currentY = parseInt(duckElement.style.top);
+                const newY = currentY + 15;
+
+                duckElement.style.transform = `scale(3) rotateY(${rotation}deg)`;
+                duckElement.style.top = `${newY}px`;
+
+                if (newY >= gameAreaHeight) {
+                    clearInterval(fallInterval);
+                    setTimeout(() => {
+                        duckElement.remove();
+                    }, 200);
+                }
+            }, 50);
+        }, 250);
+    };
+
+    const checkHit = (x, y) => {
+        if (!isAlive || !duckElement) return false;
+
+        const duckRect = duckElement.getBoundingClientRect();
+
+        if (
+            x >= duckRect.left &&
+            x <= duckRect.right &&
+            y >= duckRect.top &&
+            y <= duckRect.bottom
+        ) {
+            kill();
+            return true;
+        }
+
+        return false;
+    };
+
+    const move = (element, movement, initialPosition) => {
+        duckElement = element;
+
         let currentMovement = movement;
         let currentFrame = 0;
         const totalFrames = 3;
@@ -260,24 +277,23 @@ export const Duck = () => {
         let yPos = initialPosition.y;
         let framesCounter = 6;
 
-        const animationId = setInterval(() => {
-            currentFrame = (currentFrame + 1) % totalFrames;
+        animationId = setInterval(() => {
+            if (!isAlive) {
+                clearInterval(animationId);
+                return;
+            }
 
+            currentFrame = (currentFrame + 1) % totalFrames;
             updateSprite(duckElement, currentMovement.sprites, currentFrame);
 
             xPos += currentMovement.moveX;
             yPos += currentMovement.moveY;
 
-            if (isDied(xPos, yPos, duckElement, bounds.height)) {
-                clearInterval(animationId);
-                return;
-            }
-
             if (framesCounter <= 0) {
                 const collision = checkCollisions(xPos, yPos, bounds);
                 if (collision) {
                     if (collisionCounter >= 1) {
-                        handleDuckEscape(duckElement);
+                        handleDuckEscape();
                         clearInterval(animationId);
                         return;
                     }
@@ -288,20 +304,17 @@ export const Duck = () => {
                 framesCounter--;
             }
 
-            // Update position using left/top properties
             duckElement.style.left = `${xPos}px`;
             duckElement.style.top = `${yPos}px`;
 
-            // Set rotation and scale separately
             duckElement.style.transform = `scale(3) ${currentMovement.rotation}`;
-
-            return currentFrame;
         }, 150);
     };
 
     return {
         spawn,
         move,
-        movementsOptions,
+        checkHit,
+        getIsAlive: () => isAlive,
     };
 };

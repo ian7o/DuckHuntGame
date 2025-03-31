@@ -1,16 +1,16 @@
 import { Crosshair } from './input/crosshair.js';
-import { Duck } from './game/duck.js';
+import { Game } from './game/game.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded');
+    const startButton = document.querySelector('.playButton');
+    const restartButton = document.querySelector('.restartButton');
+
     const crosshair = Crosshair();
     crosshair.initMouseTracking();
-    const gameArea = document.querySelector('.gameArea');
+    const game = Game();
 
-    const duck = Duck();
-    const spawnData = duck.spawn(gameArea);
-    duck.move(spawnData.duckElement,spawnData.movement,spawnData.initialPosition)
-
-    // Add this debug line
-    console.log('Game area HTML after duck:', gameArea.innerHTML);
+    document.addEventListener('click', () => game.processShot());
+    startButton.addEventListener('click', () =>  game.startGame());
+    restartButton.addEventListener('click', () => game.restartGame())
 });
+
