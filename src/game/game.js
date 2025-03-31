@@ -25,7 +25,7 @@ export const Game = () => {
         dogLaugh: new Audio('./assets/sounds/dogLaugh.mp3'),
         gameOver: new Audio('./assets/sounds/lose.mp3'),
         nextRound: new Audio('./assets/sounds/nextRound.mp3'),
-        startGame: new Audio('assets/sounds/startGame.mp3')
+        startGame: new Audio('assets/sounds/startGame.mp3'),
     };
 
     const dog = Dog();
@@ -37,7 +37,7 @@ export const Game = () => {
     //*GAME INIT
     const startGame = () => {
         mainMenu.remove();
-        sounds.startGame.play()
+        sounds.startGame.play();
         dog.move();
         setTimeout(() => {
             wave();
@@ -178,7 +178,7 @@ export const Game = () => {
     };
 
     const gameOver = () => {
-        sounds.gameOver.play()
+        sounds.gameOver.play();
         gameOverMenu.style.display = 'flex';
         gameOverMenu.querySelector('.finalScore').textContent = score;
     };
@@ -200,8 +200,8 @@ export const Game = () => {
                 currentNumberOfHitForDog++;
                 duckInfo.killed = true;
                 hittedADuck = true;
-                sounds.shot.play()
-                sounds.duckFall.play()
+                sounds.shot.play();
+                sounds.duckFall.play();
 
                 dog.withDucks(currentNumberOfHitForDog);
                 if (currentNumberOfHitForDog === 2) {
@@ -215,7 +215,7 @@ export const Game = () => {
         if (!hittedADuck) {
             missedShots++;
             dog.laugh();
-            sounds.dogLaugh.play()
+            sounds.dogLaugh.play();
         }
         checkForEscapedDucks();
 

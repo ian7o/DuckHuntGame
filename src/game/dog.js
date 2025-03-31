@@ -138,17 +138,20 @@ export const Dog = () => {
 
     const laugh = () => {
         const dogArea = document.querySelector('.dogArea');
+        const dogAreaHeightTopLimit = dogArea.clientHeight * 0.988;
+        const dogAreaHeightDownLimit = dogAreaHeightTopLimit + 90;
+
         const dog = document.createElement('div');
         dog.classList.add('sprite-dog');
 
         const totalFrames = 2;
         let currentFrame = 0;
         let moveSpeed = 10;
-        let topAnimationLimit = 700;
-        let downAnimationLimit = 850;
+        let topAnimationLimit = dogAreaHeightTopLimit;
+        let downAnimationLimit = dogAreaHeightDownLimit;
         let dogStatus = 'Laugh up';
         let xPos = dogArea.clientWidth / 2;
-        let yPos = 820;
+        let yPos = dogAreaHeightDownLimit;
 
         const intervalId = setInterval(() => {
             currentFrame = (currentFrame + 1) % totalFrames;
@@ -182,6 +185,8 @@ export const Dog = () => {
 
     const withDucks = duckDeathQuantity => {
         const dogArea = document.querySelector('.dogArea');
+        const dogAreaHeightTopLimit = dogArea.clientHeight * 0.988;
+        const dogAreaHeightDownLimit = dogAreaHeightTopLimit + 90;
 
         const dog = document.createElement('div');
         dog.classList.add('sprite-dog');
@@ -189,11 +194,11 @@ export const Dog = () => {
         const totalFrames = 2;
         let currentFrame = 0;
         let moveSpeed = 15;
-        let topAnimationLimit = 700;
-        let downAnimationLimit = 850;
+        let topAnimationLimit = dogAreaHeightTopLimit;
+        let downAnimationLimit = dogAreaHeightDownLimit;
         let dogStatus = 'Laugh up';
         let xPos = dogArea.clientWidth / 2;
-        let yPos = 820;
+        let yPos = dogAreaHeightDownLimit;
 
         const intervalId = setInterval(() => {
             currentFrame = (currentFrame + 1) % totalFrames;
