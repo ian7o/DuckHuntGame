@@ -1,5 +1,5 @@
-import { Crosshair } from './input/crosshair.js';
-import { Game } from './game/game.js';
+import { Crosshair } from './src/input/crosshair.js';
+import { Game } from './src/game/game.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const startButton = document.querySelector('.playButton');
