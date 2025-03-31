@@ -1,5 +1,6 @@
 import { Duck } from './duck.js';
 import { InputHandler } from '../input/input.js';
+import { Dog } from './dog.js';
 
 export const game = () => {
     let score = 0;
@@ -16,7 +17,9 @@ export const game = () => {
     let canShoot = false;
     let currentHittedDucks = 0;
     let isStartingNewWave = false;
+    let currentNumberOfHitForDog = 0;
 
+    const dog = Dog();
     const gameArea = document.querySelector('.gameArea');
     const inputHandler = InputHandler();
 
@@ -132,22 +135,30 @@ export const game = () => {
 
         const shotNumber = 3 - shotsRemaining + 1;
         shotsRemaining--;
-
         let hittedADuck = false;
-
         let clickX = inputHandler.getMouseXPosition();
         let clickY = inputHandler.getMouseYPosition();
 
         activeDucks.forEach(duckInfo => {
             if (!duckInfo.killed && duckInfo.duck.checkHit(clickX, clickY)) {
                 currentHittedDucks++;
-                hittedADuck = true;
+                currentNumberOfHitForDog++;
                 duckInfo.killed = true;
+                hittedADuck = true;
+
+                dog.withDucks(currentNumberOfHitForDog);
+                if (currentNumberOfHitForDog === 2) {
+                    currentNumberOfHitForDog = 0;
+                }
                 updateScore();
                 updateDucksKilledDisplay();
             }
         });
 
+        if (!hittedADuck) {
+            missedShots++;
+            dog.laugh();
+        }
         checkForEscapedDucks();
 
         if (shotsRemaining === 0 && activeDucks.some(duck => !duck.killed && !duck.escaped)) {
@@ -167,10 +178,6 @@ export const game = () => {
             missedShots >= maxMissedShots
         ) {
             checkWaveEnd();
-        }
-
-        if (!hittedADuck) {
-            missedShots++;
         }
 
         hideBullets(shotNumber);

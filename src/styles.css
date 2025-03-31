@@ -7,26 +7,46 @@
     padding: 0;
     box-sizing: border-box;
 }
+.sprite-duck {
+	background: url("assets/DuckHuntSprites.png") no-repeat;
+	width: 34px;
+	height: 31px;
+	position: absolute;
+	transform: scale(2); /* Makes the duck 2x bigger */
+	transform-origin: center center; /* Ensures scaling happens from the center */
+}
+.sprite-dog {
+	background: url('assets/DuckHuntSprites.png') no-repeat;
+	width: 53px;
+	height: 40px;
+    transform: scale(3);
+    transform-origin: center center;
+    z-index: 10;
+    top: 10%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-/** ROOT VARIABLES */
 :root {
-    --duckHitOrMissIconsWidth: 25vw;
-    --scoreContainerWidth: 15vw;
-    --roundsContainerWidth: 10vw;
-    --gameAreaHeight: 35vw;
-    --border-radius: 16px;
-    --container-height: 80px;
-    --text-color: white;
-    --bg-color: black;
-    --font-size: 24px;
+  	--duckHitOrMissIconsWidth: 25vw;
+  	--scoreContainerWidth: 15vw;
+  	--roundsContainerWidth: 10vw;
+  	--gameAreaHeight: 35vw;
+  	--border-radius: 16px;
+  	--container-height: 80px;
+  	--text-color: white;
+  	--bg-color: black;
+  	--font-size: 24px;
 }
 
 /** MAIN GAME CONTAINER */
 .gameContainer {
-    height: 100vh;
+  	height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: skyblue;
+  	background-color: skyblue;
 }
 
 /** GAME AREA SECTION */
@@ -37,7 +57,11 @@
     align-items: flex-end;
     height: 70%;
 }
-
+.dogArea{
+  position: absolute;
+  width: 100%;
+  height: 70vh;
+}
 .treeContainer {
     position: relative;
     height: fit-content;
