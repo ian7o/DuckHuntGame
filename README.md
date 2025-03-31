@@ -20,7 +20,7 @@ Is just a simple game that emule the duckHunt game originally launched for nes
 
 > Difficulty Levels: The game features different difficulty levels, increasing the speed.
 
->   End of the Game: The game continues until the player decides to stop or until a specific number of rounds is completed.
+>   End of the Game: The game continues until the player decides to stop or until reach a specific number of missing ducks.
 
 > have fun 
 
