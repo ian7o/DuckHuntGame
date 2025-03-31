@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
 
 /** GLOBAL STYLES */
 * {
@@ -8,12 +9,12 @@
     box-sizing: border-box;
 }
 .sprite-duck {
-	background: url("assets/DuckHuntSprites.png") no-repeat;
-	width: 34px;
-	height: 31px;
-	position: absolute;
-	transform: scale(2); /* Makes the duck 2x bigger */
-	transform-origin: center center; /* Ensures scaling happens from the center */
+  background: url('assets/DuckHuntSprites.png') no-repeat;
+  width: 34px;
+  height: 31px;
+  position: absolute;
+  transform: scale(2); /* Makes the duck 2x bigger */
+  transform-origin: center center; /* Ensures scaling happens from the center */
 }
 .sprite-dog {
 	background: url('assets/DuckHuntSprites.png') no-repeat;
@@ -289,4 +290,103 @@
 
 body.crosshair-active {
     cursor: none;
+}
+
+/*
+*/
+.spacers {
+  height: 400px;
+}
+.gameMenuSeparator {
+  height: 400px;
+}
+.mainMenu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  margin-top: auto;
+  margin-right: auto;
+  width: 600px;
+}
+.duckTile {
+  color: #66f001;
+  font-size: 180px;
+  text-shadow: 0px 2px 4px black;
+  z-index: 1;
+  align-self: flex-start;
+}
+.huntTile {
+  color: #ff6800;
+  font-size: 160px;
+  text-shadow: 0px 2px 4px black;
+  z-index: 1;
+  align-self: flex-end;
+}
+
+.playbutton {
+  color: white;
+  font-weight: bold;
+  background-color: #cfcfcf;
+  width: 200px;
+  text-align: center;
+  border-radius: 16px;
+  padding: 0 1%;
+  text-shadow: 8px 2px 4px darkslategrey;
+  box-shadow: 8px 4px 4px darkslategrey;
+  font-size: 60px;
+  z-index: 1;
+  align-self: center;
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: darkslategrey;
+}
+
+.playbutton:hover {
+  background-color: #66f001;
+}
+
+.inMenu {
+  visibility: hidden;
+}
+
+.alingGameOverMenu {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.gameOverMenu {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  padding: 200px 9px 235px;
+  border-radius: 25px;
+  gap: 20px;
+  background-color: rgba(0, 0, 0, 0.653);
+  height: 200px;
+  z-index: 1;
+}
+.gameOverTitle {
+  color: red;
+  font-size: 140px;
+  text-shadow: 2px 4px 4px rgb(127, 5, 5);
+}
+.restartButton {
+  color: white;
+  font-weight: bold;
+  background-color: #cfcfcf;
+  text-align: center;
+  border-radius: 16px;
+  padding: 0 1%;
+  text-shadow: 8px 2px 4px darkslategrey;
+  box-shadow: 8px 4px 4px darkslategrey;
+  font-size: 60px;
+  z-index: 1;
+  align-self: center;
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: darkslategrey;
 }
