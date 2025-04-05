@@ -24,5 +24,7 @@ Is just a simple game that emule the duckHunt game originally launched for nes
 
 > have fun 
 
+#To play just click in the link https://ian7o.github.io/DuckHuntGame/
+
 # Technologies used in the project
 [![My Skills](https://skillicons.dev/icons?i=js,html,css)](https://skillicons.dev)
